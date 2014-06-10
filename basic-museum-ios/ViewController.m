@@ -20,6 +20,9 @@
 //NSArray * const beaconContent[3] = [NSArray arrayWithObjects:{@"The Boxer Revolution", @"Duke Ellington", @"Steve Job"}, {[UIColor redColor], [UIColor blueColor], [UIColor greenColor]}, nil];
 
 
+CLBeaconMajorValue BEACON_MAJOR_VERSION     = 8727;
+CLBeaconMajorValue BEACON_MINOR_VERSION     = 42728;
+
 @interface ViewController () <ESTBeaconManagerDelegate>
 
 @property (nonatomic, strong) ESTBeacon         *beacon;
@@ -53,6 +56,8 @@
     return self;
 }
 
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -61,12 +66,15 @@
     self.beaconManager.delegate = self;
     
     self.beaconRegion = [[ESTBeaconRegion alloc] initWithProximityUUID:self.beacon.proximityUUID
-                                                                 major:[self.beacon.major unsignedIntValue]
-                                                                 minor:[self.beacon.minor unsignedIntValue]
+                                                                 major: BEACON_MAJOR_VERSION//[self.beacon.major unsignedIntValue]
+                                                                 minor:BEACON_MINOR_VERSION//[self.beacon.minor unsignedIntValue]
                                                             identifier:@"RegionIdentifier"];
-    
-    [self.beaconManager startMonitoringForRegion:self.beaconRegion];
+    @try {
+//    [self.beaconManager startMonitoringForRegion:self.beaconRegion];
     [self.beaconManager startRangingBeaconsInRegion:self.beaconRegion];
+    } @catch (NSException *exception) {
+        NSLog(@"%@", exception.reason);
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -92,6 +100,8 @@
     
     [self.indicatorView.layer insertSublayer:self.indicatorBackgroundLayer atIndex:0];
 }
+
+
 
 - (void)beaconManager:(ESTBeaconManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(ESTBeaconRegion *)region
     {

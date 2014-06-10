@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ESTBeacon.h"
+
 
 @interface ViewController : UIViewController
 
@@ -17,5 +19,6 @@
 @property (nonatomic) IBOutlet UILabel *indicatorLabel;
 @property (nonatomic) IBOutlet UIImage *lufthouseLogo;
 //-(IBAction)changeActiveBeacon;
+- (id)initWithBeacon:(ESTBeacon *)beacon;
 
 @end
