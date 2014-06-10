@@ -11,24 +11,47 @@
 #import "ESTBeaconRegion.h"
 #import "ViewController.h"
 
-NSString * const REGION_IDENTIFER           = @"regionid";
-CLBeaconMajorValue BEACON_MAJOR_VERSION     = 8727;
-CLBeaconMajorValue BEACON_MINOR_VERSION     = 42728;
+
+
+
+//NSString * const REGION_IDENTIFER           = @"regionid";
+//NSNumber * targetBeaconMajorValues[3];
+//NSNumber * targetBeaconMinorValues[3];
+//NSArray * const beaconContent[3] = [NSArray arrayWithObjects:{@"The Boxer Revolution", @"Duke Ellington", @"Steve Job"}, {[UIColor redColor], [UIColor blueColor], [UIColor greenColor]}, nil];
 
 
 @interface ViewController () <ESTBeaconManagerDelegate>
 
-@property (nonatomic, strong) ESTBeaconManager* beaconManager;
+@property (nonatomic, strong) ESTBeacon         *beacon;
+@property (nonatomic, strong) ESTBeaconManager  *beaconManager;
+@property (nonatomic, strong) ESTBeaconRegion   *beaconRegion;
+
 @property (nonatomic) CAShapeLayer *indicatorBackgroundLayer;
 
-@property ESTBeacon * beaconBoxerRevolution;
-@property ESTBeacon * beaconDukeEllington;
-@property ESTBeacon * beaconSteveJobs;
+@property NSMutableArray * contentBeaconArray;
+//@property ESTBeacon * beaconBoxerRevolution;
+//@property ESTBeacon * beaconDukeEllington;
+//@property ESTBeacon * beaconSteveJobs;
 @property ESTBeacon * activeBeacon;
+
+@property NSMutableArray * targetBeaconMajorValue;
+@property NSMutableArray * targetBeaconMinorValue;
+@property NSArray * beaconContent;
+
 
 @end
 
 @implementation ViewController
+
+- (id)initWithBeacon:(ESTBeacon *)beacon
+{
+    self = [super init];
+    if (self)
+    {
+        self.beacon = beacon;
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -37,11 +60,13 @@ CLBeaconMajorValue BEACON_MINOR_VERSION     = 42728;
     self.beaconManager = [[ESTBeaconManager alloc] init];
     self.beaconManager.delegate = self;
     
-    ESTBeaconRegion* region = [[ESTBeaconRegion alloc] initWithProximityUUID:ESTIMOTE_PROXIMITY_UUID
-                                                                       major:BEACON_MAJOR_VERSION
-                                        minor:BEACON_MINOR_VERSION                                                                  identifier:REGION_IDENTIFER];
+    self.beaconRegion = [[ESTBeaconRegion alloc] initWithProximityUUID:self.beacon.proximityUUID
+                                                                 major:[self.beacon.major unsignedIntValue]
+                                                                 minor:[self.beacon.minor unsignedIntValue]
+                                                            identifier:@"RegionIdentifier"];
     
-    [self.beaconManager startRangingBeaconsInRegion:region];
+    [self.beaconManager startMonitoringForRegion:self.beaconRegion];
+    [self.beaconManager startRangingBeaconsInRegion:self.beaconRegion];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -69,37 +94,25 @@ CLBeaconMajorValue BEACON_MINOR_VERSION     = 42728;
 }
 
 - (void)beaconManager:(ESTBeaconManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(ESTBeaconRegion *)region
-{
-    if ([beacons count] > 0) {
-//        ESTBeacon *closestBeacon = [beacons firstObject];
-        ESTBeacon *currentBeacon = [beacons firstObject];
-        for (int i = 0; i < [beacons count]; i++) {
-            ESTBeacon *currentBeacon = [beacons objectAtIndex:i];
-            if (currentBeacon.proximityUUID ==  [[NSUUID alloc] initWithUUIDString:@"86E4BDEA-C6FF-442C-95CB-E6E557A23CF2"]) {
-                self.beaconBoxerRevolution = currentBeacon;
-            }
-            else if (currentBeacon.proximityUUID ==  [[NSUUID alloc] initWithUUIDString:@"A50598FD-5CE0-4359-B47B-1D0C313B3651"]) {
-                self.beaconDukeEllington = currentBeacon;
-            }
-            else if (currentBeacon.proximityUUID ==  [[NSUUID alloc] initWithUUIDString:@"E9E24881-3250-4106-8522-28079D6A51CD"]) {
-                self.beaconSteveJobs = currentBeacon;
+    {
+        if([self.beaconContent count] == 0) {
+            self.beaconContent = [NSArray arrayWithObjects:[NSArray arrayWithObjects: @"The Boxer Revolution", @"Duke Ellington", @"Steve Job", nil], [NSArray arrayWithObjects: [UIColor redColor], [UIColor blueColor], [UIColor greenColor], nil], nil];
+        }
+        if([self.targetBeaconMinorValue count] == 0) {
+            self.targetBeaconMajorValue =  [NSMutableArray arrayWithObjects: [NSNumber numberWithInt:43365],[NSNumber numberWithInt:14412], [NSNumber numberWithInt:1010], nil];
+            self.targetBeaconMinorValue = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:65535], [NSNumber numberWithInt:39720], [NSNumber numberWithInt:62689], nil];
+            self.contentBeaconArray = [NSMutableArray arrayWithObjects:nil];
+        }
+    
+    ESTBeacon *currentBeacon;
+    
+    for(int i = 0; i < [beacons count]; i++){
+        currentBeacon = [beacons objectAtIndex:i];
+        for(int j = 0; j < [beacons count]; j++){
+            if (currentBeacon.major == self.targetBeaconMajorValue[i] && currentBeacon.minor == self.targetBeaconMinorValue[i]){
+                self.contentBeaconArray[i] = currentBeacon;
             }
         }
-        
-        [self performSelectorOnMainThread:@selector(updateUI:) withObject:currentBeacon waitUntilDone:YES];
-    }
-    
-    else if ([beacons count] == 0) {
-        self.beaconBoxerRevolution = [ESTBeacon init];
-        self.beaconBoxerRevolution.proximityUUID = [[NSUUID alloc] initWithUUIDString:@"86E4BDEA-C6FF-442C-95CB-E6E557A23CF2"];
-        self.beaconDukeEllington = [ESTBeacon init];
-        self.beaconDukeEllington.proximityUUID = [[NSUUID alloc] initWithUUIDString:@"A50598FD-5CE0-4359-B47B-1D0C313B3651"];
-        self.beaconSteveJobs = [ESTBeacon init];
-        self.beaconSteveJobs.proximityUUID = [[NSUUID alloc] initWithUUIDString:@"E9E24881-3250-4106-8522-28079D6A51CD"];
-        
-        ESTBeacon *currentBeacon = self.beaconBoxerRevolution;
-        
-        [self performSelectorOnMainThread:@selector(updateUI:) withObject:currentBeacon waitUntilDone:YES];
     }
 }
 
@@ -112,48 +125,35 @@ CLBeaconMajorValue BEACON_MINOR_VERSION     = 42728;
 //                                    @"Minor",
 //                                    BEACON_MINOR_VERSION];
 //    
-    if(self.beaconBoxerRevolution.proximity == CLProximityImmediate){
-        //Insert content for beacon; Boxer Revolution
-            {
-                self.indicatorLabel.text = @"The Boxer Revolution";
-                self.indicatorBackgroundLayer.strokeColor = [[UIColor redColor] CGColor];
-            }
-    }
+    ESTBeacon * checkBeacon;
     
-    else if(self.beaconDukeEllington.proximity == CLProximityImmediate){
-        //Insert content for beacon; Duke Ellington
-        {
-            self.indicatorLabel.text = @"Duke Ellington";
-            self.indicatorBackgroundLayer.strokeColor = [[UIColor blueColor] CGColor];
+    for(int i = 0; i < [self.contentBeaconArray count]; i++) {
+        checkBeacon = self.contentBeaconArray[i];
+        if(checkBeacon.proximity == CLProximityImmediate) {
+            self.indicatorLabel.text = self.beaconContent[0][i];
+            self.indicatorBackgroundLayer.strokeColor = [self.beaconContent[1][i] CGColor];
         }
     }
     
-    else if(self.beaconSteveJobs.proximity == CLProximityImmediate){
-        //Insert content for beacon; Steve Jobs
-        {
-            self.indicatorLabel.text = @"Steve Jobs";
-            self.indicatorBackgroundLayer.strokeColor = [[UIColor greenColor] CGColor];
-        }
-    }
     
 }
 
-- (IBAction)changeActiveBeacon
-{
-    
-    if (self.activeBeacon == self.beaconBoxerRevolution) {
-        self.activeBeacon = self.beaconDukeEllington;
-    }
-    else if (self.activeBeacon == self.beaconDukeEllington) {
-        self.activeBeacon = self.beaconSteveJobs;
-    }
-    else if (self.activeBeacon == self.beaconSteveJobs) {
-        self.activeBeacon = self.beaconBoxerRevolution;
-    }
-    else {
-        self.activeBeacon = self.beaconBoxerRevolution;
-    }
-}
+//- (IBAction)changeActiveBeacon
+//{
+//    
+//    if (self.activeBeacon == self.beaconBoxerRevolution) {
+//        self.activeBeacon = self.beaconDukeEllington;
+//    }
+//    else if (self.activeBeacon == self.beaconDukeEllington) {
+//        self.activeBeacon = self.beaconSteveJobs;
+//    }
+//    else if (self.activeBeacon == self.beaconSteveJobs) {
+//        self.activeBeacon = self.beaconBoxerRevolution;
+//    }
+//    else {
+//        self.activeBeacon = self.beaconBoxerRevolution;
+//    }
+//}
 
 
 @end

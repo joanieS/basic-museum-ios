@@ -60,16 +60,10 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9NQ-YR-C3c">
-                                <rect key="frame" x="117" y="72" width="86" height="86"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="lufthouselogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="FfF-yt-kWM">
+                                <rect key="frame" x="105" y="61" width="110" height="110"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="lufthouselogo.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="changeActiveBeacon" destination="vXZ-lx-hvc" eventType="touchUpInside" id="0eU-a1-PZu"/>
-                                </connections>
-                            </button>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -77,7 +71,7 @@
                     </view>
                     <connections>
                         <outlet property="indicatorLabel" destination="ARK-XH-NuM" id="KSN-G9-LfZ"/>
-                        <outlet property="indicatorView" destination="8f0-3k-03O" id="Tsh-gB-bFA"/>
+                        <outlet property="indicatorView" destination="vhb-8l-GlQ" id="chB-c4-14b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

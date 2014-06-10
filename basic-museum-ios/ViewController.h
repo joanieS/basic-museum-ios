@@ -15,6 +15,7 @@
 //@property (nonatomic) IBOutlet UILabel *beaconStatsLabel;
 @property (nonatomic) IBOutlet UIView *indicatorView;
 @property (nonatomic) IBOutlet UILabel *indicatorLabel;
--(IBAction)changeActiveBeacon;
+@property (nonatomic) IBOutlet UIImage *lufthouseLogo;
+//-(IBAction)changeActiveBeacon;
 
 @end
