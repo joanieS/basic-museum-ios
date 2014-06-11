@@ -20,9 +20,6 @@
 //NSArray * const beaconContent[3] = [NSArray arrayWithObjects:{@"The Boxer Revolution", @"Duke Ellington", @"Steve Job"}, {[UIColor redColor], [UIColor blueColor], [UIColor greenColor]}, nil];
 
 
-CLBeaconMajorValue BEACON_MAJOR_VERSION     = 8727;
-CLBeaconMajorValue BEACON_MINOR_VERSION     = 42728;
-
 @interface ViewController () <ESTBeaconManagerDelegate>
 
 @property (nonatomic, strong) ESTBeacon         *beacon;
@@ -37,8 +34,8 @@ CLBeaconMajorValue BEACON_MINOR_VERSION     = 42728;
 //@property ESTBeacon * beaconSteveJobs;
 @property ESTBeacon * activeBeacon;
 
-@property NSMutableArray * targetBeaconMajorValue;
-@property NSMutableArray * targetBeaconMinorValue;
+@property NSArray * targetBeaconMajorValue;
+@property NSArray * targetBeaconMinorValue;
 @property NSArray * beaconContent;
 
 
@@ -65,10 +62,8 @@ CLBeaconMajorValue BEACON_MINOR_VERSION     = 42728;
     self.beaconManager = [[ESTBeaconManager alloc] init];
     self.beaconManager.delegate = self;
     
-    self.beaconRegion = [[ESTBeaconRegion alloc] initWithProximityUUID:self.beacon.proximityUUID
-                                                                 major: BEACON_MAJOR_VERSION//[self.beacon.major unsignedIntValue]
-                                                                 minor:BEACON_MINOR_VERSION//[self.beacon.minor unsignedIntValue]
-                                                            identifier:@"RegionIdentifier"];
+    self.beaconRegion = [[ESTBeaconRegion alloc] initWithProximityUUID:ESTIMOTE_PROXIMITY_UUID
+                         identifier:@"RegionIdentifier"];
     @try {
 //    [self.beaconManager startMonitoringForRegion:self.beaconRegion];
     [self.beaconManager startRangingBeaconsInRegion:self.beaconRegion];
@@ -109,9 +104,9 @@ CLBeaconMajorValue BEACON_MINOR_VERSION     = 42728;
             self.beaconContent = [NSArray arrayWithObjects:[NSArray arrayWithObjects: @"The Boxer Revolution", @"Duke Ellington", @"Steve Job", nil], [NSArray arrayWithObjects: [UIColor redColor], [UIColor blueColor], [UIColor greenColor], nil], nil];
         }
         if([self.targetBeaconMinorValue count] == 0) {
-            self.targetBeaconMajorValue =  [NSMutableArray arrayWithObjects: [NSNumber numberWithInt:43365],[NSNumber numberWithInt:14412], [NSNumber numberWithInt:1010], nil];
-            self.targetBeaconMinorValue = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:65535], [NSNumber numberWithInt:39720], [NSNumber numberWithInt:62689], nil];
-            self.contentBeaconArray = [NSMutableArray arrayWithObjects:nil];
+            self.targetBeaconMajorValue =  [NSArray arrayWithObjects: [NSNumber numberWithLong:57770],[NSNumber numberWithLong:47919], [NSNumber numberWithLong:1010], nil];
+            self.targetBeaconMinorValue = [NSArray arrayWithObjects:[NSNumber numberWithLong:47919], [NSNumber numberWithLong:39720], [NSNumber numberWithLong:62689], nil];
+            self.contentBeaconArray = [NSMutableArray arrayWithCapacity:self.targetBeaconMajorValue.count];
         }
     
     ESTBeacon *currentBeacon;
@@ -119,8 +114,10 @@ CLBeaconMajorValue BEACON_MINOR_VERSION     = 42728;
     for(int i = 0; i < [beacons count]; i++){
         currentBeacon = [beacons objectAtIndex:i];
         for(int j = 0; j < [beacons count]; j++){
-            if (currentBeacon.major == self.targetBeaconMajorValue[i] && currentBeacon.minor == self.targetBeaconMinorValue[i]){
+            if ([currentBeacon.major isEqual:self.targetBeaconMajorValue[i]] && [currentBeacon.minor isEqual:self.targetBeaconMinorValue[i]]){
+//                [self.contentBeaconArray :currentBeacon];
                 self.contentBeaconArray[i] = currentBeacon;
+                NSLog(@"%s", "Beacon matched!");
             }
         }
     }
