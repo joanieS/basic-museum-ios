@@ -64,12 +64,20 @@
                                 <rect key="frame" x="105" y="61" width="110" height="110"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="UMd-km-3If">
+                                <rect key="frame" x="35" y="397" width="250" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                         <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     </view>
                     <connections>
+                        <outlet property="contentTitle" destination="UMd-km-3If" id="HeS-7h-zTQ"/>
                         <outlet property="indicatorLabel" destination="ARK-XH-NuM" id="KSN-G9-LfZ"/>
                         <outlet property="indicatorView" destination="vhb-8l-GlQ" id="chB-c4-14b"/>
                     </connections>

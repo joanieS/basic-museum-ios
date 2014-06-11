@@ -65,7 +65,7 @@
     self.beaconRegion = [[ESTBeaconRegion alloc] initWithProximityUUID:ESTIMOTE_PROXIMITY_UUID
                          identifier:@"RegionIdentifier"];
     @try {
-//    [self.beaconManager startMonitoringForRegion:self.beaconRegion];
+    [self.beaconManager startMonitoringForRegion:self.beaconRegion];
     [self.beaconManager startRangingBeaconsInRegion:self.beaconRegion];
     } @catch (NSException *exception) {
         NSLog(@"%@", exception.reason);
@@ -104,7 +104,7 @@
             self.beaconContent = [NSArray arrayWithObjects:[NSArray arrayWithObjects: @"The Boxer Revolution", @"Duke Ellington", @"Steve Job", nil], [NSArray arrayWithObjects: [UIColor redColor], [UIColor blueColor], [UIColor greenColor], nil], nil];
         }
         if([self.targetBeaconMinorValue count] == 0) {
-            self.targetBeaconMajorValue =  [NSArray arrayWithObjects: [NSNumber numberWithLong:57770],[NSNumber numberWithLong:47919], [NSNumber numberWithLong:1010], nil];
+            self.targetBeaconMajorValue =  [NSArray arrayWithObjects: [NSNumber numberWithLong:57770],[NSNumber numberWithLong:14412], [NSNumber numberWithLong:1010], nil];
             self.targetBeaconMinorValue = [NSArray arrayWithObjects:[NSNumber numberWithLong:47919], [NSNumber numberWithLong:39720], [NSNumber numberWithLong:62689], nil];
             self.contentBeaconArray = [NSMutableArray arrayWithCapacity:self.targetBeaconMajorValue.count];
         }
@@ -121,9 +121,11 @@
             }
         }
     }
+        
+        [self performSelectorOnMainThread:@selector(updateUI:) withObject:self.contentBeaconArray waitUntilDone:YES];
 }
 
-- (void)updateUI:(ESTBeacon *)beacon
+- (void)updateUI:(NSMutableArray *)beaconArray
 {
 //    self.beaconUuidLabel.text = [beacon.proximityUUID UUIDString];
 //    self.beaconVersionLabel.text = [NSString stringWithFormat:@"%@: %d  %@: %d",
@@ -134,10 +136,11 @@
 //    
     ESTBeacon * checkBeacon;
     
-    for(int i = 0; i < [self.contentBeaconArray count]; i++) {
-        checkBeacon = self.contentBeaconArray[i];
-        if(checkBeacon.proximity == CLProximityImmediate) {
-            self.indicatorLabel.text = self.beaconContent[0][i];
+    for(int i = 0; i < [beaconArray count]; i++) {
+        checkBeacon = beaconArray[i];
+        if([beaconArray[i] proximity] == CLProximityNear) {
+            NSLog(@"%@", self.beaconContent[0][i]);
+            self.contentTitle.text = self.beaconContent[0][i];
             self.indicatorBackgroundLayer.strokeColor = [self.beaconContent[1][i] CGColor];
         }
     }
