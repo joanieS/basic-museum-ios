@@ -15,13 +15,17 @@
 		9B1DC1551940AEAB00D58A69 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B1DC1541940AEAB00D58A69 /* AppDelegate.m */; };
 		9B1DC1581940AEAB00D58A69 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B1DC1561940AEAB00D58A69 /* Main_iPhone.storyboard */; };
 		9B1DC15B1940AEAB00D58A69 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B1DC1591940AEAB00D58A69 /* Main_iPad.storyboard */; };
-		9B1DC15E1940AEAB00D58A69 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B1DC15D1940AEAB00D58A69 /* ViewController.m */; };
+		9B1DC15E1940AEAB00D58A69 /* LandingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B1DC15D1940AEAB00D58A69 /* LandingViewController.m */; };
 		9B1DC1601940AEAB00D58A69 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B1DC15F1940AEAB00D58A69 /* Images.xcassets */; };
 		9B1DC1671940AEAB00D58A69 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B1DC1661940AEAB00D58A69 /* XCTest.framework */; };
 		9B1DC1681940AEAB00D58A69 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B1DC1441940AEAB00D58A69 /* Foundation.framework */; };
 		9B1DC1691940AEAB00D58A69 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B1DC1481940AEAB00D58A69 /* UIKit.framework */; };
 		9B1DC1711940AEAC00D58A69 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9B1DC16F1940AEAC00D58A69 /* InfoPlist.strings */; };
 		9B1DC1731940AEAC00D58A69 /* basic_museum_iosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B1DC1721940AEAC00D58A69 /* basic_museum_iosTests.m */; };
+		9B46E160194B5DAE0041D9A6 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B46E15F194B5DAE0041D9A6 /* ContentViewController.m */; };
+		9B46E164194B723C0041D9A6 /* Lufthouse.JSON in Resources */ = {isa = PBXBuildFile; fileRef = 9B46E161194B643E0041D9A6 /* Lufthouse.JSON */; };
+		9B72C1F71950B74A004C3617 /* LufthouseTour.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B72C1F61950B74A004C3617 /* LufthouseTour.m */; };
+		9B72C1FA1950C00F004C3617 /* LufthouseCustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B72C1F91950C00F004C3617 /* LufthouseCustomer.m */; };
 		9B9EFA7B1941FEF100F27337 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9EFA7A1941FEF100F27337 /* CoreBluetooth.framework */; };
 		9B9EFA7D1941FEFE00F27337 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9EFA7C1941FEFE00F27337 /* CoreLocation.framework */; };
 		9B9EFA861941FF3000F27337 /* libEstimoteSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9EFA851941FF3000F27337 /* libEstimoteSDK.a */; };
@@ -54,14 +58,21 @@
 		9B1DC1541940AEAB00D58A69 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9B1DC1571940AEAB00D58A69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		9B1DC15A1940AEAB00D58A69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		9B1DC15C1940AEAB00D58A69 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		9B1DC15D1940AEAB00D58A69 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		9B1DC15C1940AEAB00D58A69 /* LandingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LandingViewController.h; sourceTree = "<group>"; };
+		9B1DC15D1940AEAB00D58A69 /* LandingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LandingViewController.m; sourceTree = "<group>"; };
 		9B1DC15F1940AEAB00D58A69 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9B1DC1651940AEAB00D58A69 /* basic-museum-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "basic-museum-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B1DC1661940AEAB00D58A69 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		9B1DC16E1940AEAC00D58A69 /* basic-museum-iosTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "basic-museum-iosTests-Info.plist"; sourceTree = "<group>"; };
 		9B1DC1701940AEAC00D58A69 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9B1DC1721940AEAC00D58A69 /* basic_museum_iosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = basic_museum_iosTests.m; sourceTree = "<group>"; };
+		9B46E15E194B5DAE0041D9A6 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentViewController.h; path = ../ContentViewController.h; sourceTree = "<group>"; };
+		9B46E15F194B5DAE0041D9A6 /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContentViewController.m; path = ../ContentViewController.m; sourceTree = "<group>"; };
+		9B46E161194B643E0041D9A6 /* Lufthouse.JSON */ = {isa = PBXFileReference; explicitFileType = text.json; fileEncoding = 4; path = Lufthouse.JSON; sourceTree = "<group>"; };
+		9B72C1F51950B74A004C3617 /* LufthouseTour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LufthouseTour.h; sourceTree = "<group>"; };
+		9B72C1F61950B74A004C3617 /* LufthouseTour.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LufthouseTour.m; sourceTree = "<group>"; };
+		9B72C1F81950C00F004C3617 /* LufthouseCustomer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LufthouseCustomer.h; sourceTree = "<group>"; };
+		9B72C1F91950C00F004C3617 /* LufthouseCustomer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LufthouseCustomer.m; sourceTree = "<group>"; };
 		9B9EFA7A1941FEF100F27337 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		9B9EFA7C1941FEFE00F27337 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		9B9EFA801941FF3000F27337 /* ESTBeacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTBeacon.h; sourceTree = "<group>"; };
@@ -109,7 +120,7 @@
 		9B1DC1381940AEAB00D58A69 = {
 			isa = PBXGroup;
 			children = (
-				9B9EFA8D19424BCB00F27337 /* lufthouselogo.png */,
+				9B46E163194B70E90041D9A6 /* Resources */,
 				9B9EFA7E1941FF3000F27337 /* EstimoteSDK */,
 				9B1DC14A1940AEAB00D58A69 /* basic-museum-ios */,
 				9B1DC16C1940AEAC00D58A69 /* basic-museum-iosTests */,
@@ -150,8 +161,10 @@
 				9B1DC1541940AEAB00D58A69 /* AppDelegate.m */,
 				9B1DC1561940AEAB00D58A69 /* Main_iPhone.storyboard */,
 				9B1DC1591940AEAB00D58A69 /* Main_iPad.storyboard */,
-				9B1DC15C1940AEAB00D58A69 /* ViewController.h */,
-				9B1DC15D1940AEAB00D58A69 /* ViewController.m */,
+				9B46E15E194B5DAE0041D9A6 /* ContentViewController.h */,
+				9B46E15F194B5DAE0041D9A6 /* ContentViewController.m */,
+				9B1DC15C1940AEAB00D58A69 /* LandingViewController.h */,
+				9B1DC15D1940AEAB00D58A69 /* LandingViewController.m */,
 				9B1DC15F1940AEAB00D58A69 /* Images.xcassets */,
 				9B1DC14B1940AEAB00D58A69 /* Supporting Files */,
 			);
@@ -161,6 +174,10 @@
 		9B1DC14B1940AEAB00D58A69 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9B72C1F51950B74A004C3617 /* LufthouseTour.h */,
+				9B72C1F61950B74A004C3617 /* LufthouseTour.m */,
+				9B72C1F81950C00F004C3617 /* LufthouseCustomer.h */,
+				9B72C1F91950C00F004C3617 /* LufthouseCustomer.m */,
 				9B1DC14C1940AEAB00D58A69 /* basic-museum-ios-Info.plist */,
 				9B1DC14D1940AEAB00D58A69 /* InfoPlist.strings */,
 				9B1DC1501940AEAB00D58A69 /* main.m */,
@@ -185,6 +202,15 @@
 				9B1DC16F1940AEAC00D58A69 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9B46E163194B70E90041D9A6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9B46E161194B643E0041D9A6 /* Lufthouse.JSON */,
+				9B9EFA8D19424BCB00F27337 /* lufthouselogo.png */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		9B9EFA7E1941FF3000F27337 /* EstimoteSDK */ = {
@@ -287,6 +313,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B46E164194B723C0041D9A6 /* Lufthouse.JSON in Resources */,
 				9B9EFA8E19424BCB00F27337 /* lufthouselogo.png in Resources */,
 				9B1DC15B1940AEAB00D58A69 /* Main_iPad.storyboard in Resources */,
 				9B1DC1601940AEAB00D58A69 /* Images.xcassets in Resources */,
@@ -310,9 +337,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B1DC15E1940AEAB00D58A69 /* ViewController.m in Sources */,
+				9B46E160194B5DAE0041D9A6 /* ContentViewController.m in Sources */,
+				9B1DC15E1940AEAB00D58A69 /* LandingViewController.m in Sources */,
 				9B1DC1551940AEAB00D58A69 /* AppDelegate.m in Sources */,
+				9B72C1FA1950C00F004C3617 /* LufthouseCustomer.m in Sources */,
 				9B1DC1511940AEAB00D58A69 /* main.m in Sources */,
+				9B72C1F71950B74A004C3617 /* LufthouseTour.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

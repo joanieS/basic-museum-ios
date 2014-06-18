@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ESTBeacon.h"
 
 @interface ContentViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UIView *ContentView;
+@property (weak, nonatomic) IBOutlet UIWebView *contentWebView;
+
+-(void)setDisplayURLString:(NSString *)displayURLString;
+
+-(UIView *)getContentViewView;
 
 @end
