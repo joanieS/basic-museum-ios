@@ -13,14 +13,6 @@
 #import "ContentViewController.h"
 
 
-
-
-//NSString * const REGION_IDENTIFER           = @"regionid";
-//NSNumber * targetBeaconMajorValues[3];
-//NSNumber * targetBeaconMinorValues[3];
-//NSArray * const beaconContent[3] = [NSArray arrayWithObjects:{@"The Boxer Revolution", @"Duke Ellington", @"Steve Job"}, {[UIColor redColor], [UIColor blueColor], [UIColor greenColor]}, nil];
-
-
 @interface LandingViewController () <ESTBeaconManagerDelegate>
 
 @property (nonatomic, strong) ESTBeacon         *beacon;
@@ -31,9 +23,6 @@
 @property (nonatomic) CAShapeLayer *indicatorBackgroundLayer;
 
 @property NSMutableArray * contentBeaconArray;
-//@property ESTBeacon * beaconBoxerRevolution;
-//@property ESTBeacon * beaconDukeEllington;
-//@property ESTBeacon * beaconSteveJobs;
 @property ESTBeacon * activeBeacon;
 
 @property NSMutableArray * beaconContent;
@@ -160,34 +149,24 @@
             self.contentBeaconArray = beaconAssignment;
         }
         
-        [self performSelectorOnMainThread:@selector(updateUI:) withObject:self.contentBeaconArray waitUntilDone:YES];
+        [self performSelectorOnMainThread:@selector(updateUI:) withObject:[beacons firstObject] waitUntilDone:YES];
 }
 
-- (void)updateUI:(NSMutableArray *)beaconArray
+- (void)updateUI:(ESTBeacon *)beacon
 {
-//    self.beaconUuidLabel.text = [beacon.proximityUUID UUIDString];
-//    self.beaconVersionLabel.text = [NSString stringWithFormat:@"%@: %d  %@: %d",
-//                                    @"Major",
-//                                    BEACON_MAJOR_VERSION,
-//                                    @"Minor",
-//                                    BEACON_MINOR_VERSION];
-//    
     ESTBeacon * checkBeacon;
+    NSMutableArray *beaconArray = self.contentBeaconArray;
     NSURL *beaconURL;
     for(int i = 0; i < [beaconArray[0] count]; i++) {
-        checkBeacon = beaconArray[0][i];
+        checkBeacon = beacon;
         self.sendableURLString = beaconArray[1][i];
-        if(([checkBeacon proximity] == CLProximityNear  || [checkBeacon proximity] == CLProximityImmediate) && ![checkBeacon.minor isEqual:self.activeMinor]) {
+        if(([checkBeacon proximity] == CLProximityNear  || [checkBeacon proximity] == CLProximityImmediate) && ![checkBeacon.minor isEqual:self.activeMinor] && [checkBeacon.minor isEqual:[[[beaconArray objectAtIndex:0] objectAtIndex:i] minor]]) {
             self.activeMinor = [[[beaconArray objectAtIndex:0] objectAtIndex:i] minor];
             beaconURL = [NSURL URLWithString:beaconArray[1][i]];
             NSURLRequest *beaconRequest = [NSURLRequest requestWithURL:beaconURL];
             [self.webView loadRequest:beaconRequest];
-//            [self performSegueWithIdentifier:@"segueToContentView" sender:self];
-        }
-//            [self.view addSubview:contentView];
-//            self.contentTitle.text = self.beaconContent[0][i];
-//            self.indicatorBackgroundLayer.strokeColor = [self.beaconContent[1][i] CGColor];
         
+        }
     }
 }
 
