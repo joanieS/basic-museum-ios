@@ -1,2 +1,2 @@
-basic-museum-ios
+basic-demo-ios
 ================
