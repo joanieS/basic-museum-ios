@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Lufthouse. All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
 #import "LandingViewController.h"
 #import "ESTBeaconManager.h"
 #import "ESTBeaconRegion.h"
@@ -13,35 +14,40 @@
 #import "ContentViewController.h"
 
 
+
 @interface LandingViewController () <ESTBeaconManagerDelegate>
 
+//Responsible for finding and tracking beacons in range
 @property (nonatomic, strong) ESTBeacon         *beacon;
 @property (nonatomic, strong) ESTBeaconManager  *beaconManager;
 @property (nonatomic, strong) ESTBeaconRegion   *beaconRegion;
+
+//Keeps track of beacon currently being displayed
 @property (nonatomic, strong) NSNumber          *activeMinor;
 
-@property (nonatomic) CAShapeLayer *indicatorBackgroundLayer;
-
+//Contains all information regarding beacons in range and their content
 @property NSMutableArray * contentBeaconArray;
-@property ESTBeacon * activeBeacon;
 
+//Contains all information from the loaded JSON
 @property NSMutableArray * beaconContent;
-@property NSString *sendableURLString;
 
+//Audio player for playing mp3 files at exhibits
+@property AVAudioPlayer *audioPlayer;
+
+//Keeps track of whether or not an exhibit's content is currently being displayed
+@property BOOL hasLanded;
 
 @end
 
+
+
 @implementation LandingViewController
 
-- (id)initWithBeacon:(ESTBeacon *)beacon
-{
-    self = [super init];
-    if (self)
-    {
-        self.beacon = beacon;
-    }
-    return self;
-}
+
+/* loadBeaconData
+ * Retrieves JSON file from a source (currently local Lufthouse.JSON) and reads
+ * the file into LufthouseCustomer and LufthouseTour objects.
+ */
 
 -(void)loadBeaconData
 {
@@ -56,25 +62,27 @@
         NSArray *outterKeys = [results allKeys];
         NSArray *innerKeys, *valueKeys;
         
-        NSMutableArray *beaconIDs, *beaconValues, *tours, *customers;
+        NSMutableArray *beaconIDs, *beaconValues, *beaconAudio, *tours, *customers;
         
         LufthouseCustomer *tempCustomer;
         LufthouseTour *tempTour;
         
         customers = [NSMutableArray array];
         for (NSString *outterKey in outterKeys) {
-//            [contentFromJSON addObject:[[results objectForKey:outterKey] allValues]];
             innerKeys = [[results objectForKey:outterKey] allKeys];
             tours = [NSMutableArray array];
             for (NSString *innerKey in innerKeys) {
                 valueKeys = [[[results objectForKey:outterKey] objectForKey:innerKey] allKeys];
                 beaconIDs = [NSMutableArray array];
                 beaconValues = [NSMutableArray array];
+                beaconAudio = [NSMutableArray array];
                 for (NSString *valueKey in valueKeys) {
                     [beaconIDs addObject:valueKey];
-                    [beaconValues addObject:[[[results objectForKey:outterKey] objectForKey:innerKey] objectForKey:valueKey]];
+                    [beaconValues addObject:[[[[results objectForKey:outterKey] objectForKey:innerKey] objectForKey:valueKey] objectAtIndex: 0]];
+                    [beaconAudio addObject: [[[[results objectForKey:outterKey] objectForKey:innerKey] objectForKey:valueKey] objectAtIndex: 1]];
+                    
                 }
-                tempTour = [[LufthouseTour alloc] initTourWithName:innerKey beaconIDArray:beaconIDs beaconContentArray:beaconValues];
+                tempTour = [[LufthouseTour alloc] initTourWithName:innerKey beaconIDArray:beaconIDs beaconContentArray:beaconValues beaconAudioArray: beaconAudio];
                 [tours addObject:tempTour];
             }
             tempCustomer = [[LufthouseCustomer alloc] initWithCustomerName:outterKey customerTours:tours];
@@ -91,6 +99,8 @@
 {
     [super viewDidLoad];
     
+    self.hasLanded = false;
+    
     self.beaconManager = [[ESTBeaconManager alloc] init];
     self.beaconManager.delegate = self;
     
@@ -102,19 +112,19 @@
     } @catch (NSException *exception) {
         NSLog(@"%@", exception.reason);
     }
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     
-    CGMutablePathRef path = CGPathCreateMutable();
-    CGPathAddEllipseInRect(path, nil, self.indicatorBackgroundLayer.bounds);
-    self.indicatorBackgroundLayer.path = path;
+    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Friday (Polka Version).mp3", [[NSBundle mainBundle] resourcePath]]];
+	
+	NSError *error;
+	self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+	self.audioPlayer.numberOfLoops = 0;
+	
+	if (self.audioPlayer == nil)
+		NSLog(@"%@",[error description]);
+	
+
     
 }
-
-
 
 - (void)beaconManager:(ESTBeaconManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(ESTBeaconRegion *)region
     {
@@ -125,7 +135,7 @@
 
         ESTBeacon *currentBeacon;
         NSString *stringifiedMinor;
-        NSMutableArray *beaconAssignment = [NSMutableArray arrayWithObjects:[NSMutableArray array], [NSMutableArray array], nil];
+        NSMutableArray *beaconAssignment = [NSMutableArray arrayWithObjects:[NSMutableArray array], [NSMutableArray array], [NSMutableArray array], nil];
         NSInteger beaconIndex = -1;
         LufthouseTour *currentTour;
         
@@ -139,6 +149,7 @@
                     if (beaconIndex != -1) {
                         [beaconAssignment[0] addObject:currentBeacon];
                         [beaconAssignment[1] addObject:[currentTour getBeaconContentAtIndex:beaconIndex]];
+                        [beaconAssignment[2] addObject:[currentTour getBeaconAudioAtIndex:beaconIndex]];
                         NSLog(@"%s", "Beacon matched!");
                     }
                 }
@@ -152,21 +163,63 @@
         [self performSelectorOnMainThread:@selector(updateUI:) withObject:[beacons firstObject] waitUntilDone:YES];
 }
 
-- (void)updateUI:(ESTBeacon *)beacon
+-(void)doVolumeFade: (NSURL *)nextSong
 {
-    ESTBeacon * checkBeacon;
+    if (self.audioPlayer.volume > 0.1 && [self.audioPlayer isPlaying]) {
+        self.audioPlayer.volume = self.audioPlayer.volume - 0.1;
+        [self performSelector:@selector(doVolumeFade:) withObject:nextSong afterDelay:0.1];
+    } else {
+        // Stop and get the sound ready for playing again
+        [self.audioPlayer stop];
+        self.audioPlayer.currentTime = 0;
+        [self.audioPlayer prepareToPlay];
+        self.audioPlayer.volume = 1.0;
+        
+        NSError *error;
+        if (nextSong != nil) {
+            
+            self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:nextSong error:&error];
+            self.audioPlayer.numberOfLoops = 0;
+        
+            if (self.audioPlayer == nil)
+                NSLog(@"%@", [error description]);
+            else
+                [self.audioPlayer play];
+        }
+    }
+}
+
+- (void)updateUI:(ESTBeacon *)checkBeacon
+{
+
     NSMutableArray *beaconArray = self.contentBeaconArray;
-    NSURL *beaconURL;
+    NSURL *beaconURL, *url;
     for(int i = 0; i < [beaconArray[0] count]; i++) {
-        checkBeacon = beacon;
-        self.sendableURLString = beaconArray[1][i];
         if(([checkBeacon proximity] == CLProximityNear  || [checkBeacon proximity] == CLProximityImmediate) && ![checkBeacon.minor isEqual:self.activeMinor] && [checkBeacon.minor isEqual:[[[beaconArray objectAtIndex:0] objectAtIndex:i] minor]]) {
             self.activeMinor = [[[beaconArray objectAtIndex:0] objectAtIndex:i] minor];
             beaconURL = [NSURL URLWithString:beaconArray[1][i]];
             NSURLRequest *beaconRequest = [NSURLRequest requestWithURL:beaconURL];
             [self.webView loadRequest:beaconRequest];
-        
+            
+            if ([[[beaconArray objectAtIndex:2] objectAtIndex:i] isEqualToString:@"nil"]) {
+                url = nil;
+            }
+            else {
+                url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], [[beaconArray objectAtIndex:2] objectAtIndex:i]]];
+            }
+            
+            [self doVolumeFade:url];
+            
+            self.hasLanded = false;
         }
+    }
+    if (checkBeacon == nil && self.hasLanded == false) {
+        beaconURL = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], @"landingImage.png"]];
+        NSURLRequest *beaconRequest = [NSURLRequest requestWithURL:beaconURL];
+        [self.webView loadRequest:beaconRequest];
+        [self doVolumeFade:nil];
+        self.hasLanded = true;
+        self.activeMinor = 0000;
     }
 }
 
@@ -176,23 +229,6 @@
 //    
 //    self.currentView = [nextView getContentViewView];
 //    [nextView setDisplayURLString:self.sendableURLString];
-//}
-
-//- (IBAction)changeActiveBeacon
-//{
-//    
-//    if (self.activeBeacon == self.beaconBoxerRevolution) {
-//        self.activeBeacon = self.beaconDukeEllington;
-//    }
-//    else if (self.activeBeacon == self.beaconDukeEllington) {
-//        self.activeBeacon = self.beaconSteveJobs;
-//    }
-//    else if (self.activeBeacon == self.beaconSteveJobs) {
-//        self.activeBeacon = self.beaconBoxerRevolution;
-//    }
-//    else {
-//        self.activeBeacon = self.beaconBoxerRevolution;
-//    }
 //}
 
 

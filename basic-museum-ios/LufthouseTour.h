@@ -13,12 +13,14 @@
 @property (nonatomic, strong) NSString *tourName;
 @property (nonatomic, strong) NSMutableArray *beaconIDs;
 @property (nonatomic, strong) NSMutableArray *beaconContent;
+@property (nonatomic, strong) NSMutableArray *beaconAudio;
 
 
--(LufthouseTour *)initTourWithName: (NSString *) tourName beaconIDArray: (NSMutableArray *) beaconIDs beaconContentArray: (NSMutableArray *) beaconContent;
+-(LufthouseTour *)initTourWithName: (NSString *) tourName beaconIDArray: (NSMutableArray *) beaconIDs beaconContentArray: (NSMutableArray *) beaconContent beaconAudioArray: (NSMutableArray *) beaconAudio;
 -(NSString *)getTourName;
 -(NSString *)getBeaconIDAtIndex: (NSInteger) index;
 -(NSString *)getBeaconContentAtIndex: (NSInteger) index;
+-(NSString *)getBeaconAudioAtIndex: (NSInteger) index;
 -(void)addBeaconID: (NSString *) newID addBeaconContent:(NSString *) newContent;
 -(NSInteger)findIndexOfID: (NSString *) targetID;
 -(NSInteger)findIndexOfContent: (NSString *) targetContent;

@@ -1,10 +1,18 @@
 {
   "WRHS": {
       "demo": {
-        "65535": "http://lufthouse.wordpress.com/2014/06/03/moving-the-1932-wedell-williams-model-44-2/",
-        "39720": "http://lufthouse.wordpress.com/2014/06/03/road-trip-1926-jordan-house-car/",
-        "62689": "oldsmobile.mp3",
-        "18722": "http://lufthouse.wordpress.com/2014/06/03/wrhs-did-you-like-what-you-saw/"
+          "35084" : ["http://browns64content.wordpress.com/2014/06/18/35084", "SongTitle.mp3"],
+          "47934" : ["http://browns64content.wordpress.com/2014/06/18/47934", "SongTitle.mp3"],
+          "47919" : ["http://browns64content.wordpress.com/2014/06/18/47919", "SongTitle.mp3"],
+          "39720" : ["http://browns64content.wordpress.com/2014/06/18/39720", "nil"],
+          "4642"  : ["http://browns64content.wordpress.com/2014/06/18/4642", "SongTitle.mp3"],
+          "5144"  : ["http://browns64content.wordpress.com/2014/06/18/5144", "SongTitle.mp3"],
+          "62443" : ["http://browns64content.wordpress.com/2014/06/18/62443", "SongTitle.mp3"],
+          "65535" : ["http://browns64content.wordpress.com/2014/06/18/65535", "SongTitle.mp3"],
+          "19734" : ["http://browns64content.wordpress.com/2014/06/18/19734", "SongTitle.mp3"],
+          "29981" : ["http://browns64content.wordpress.com/2014/06/18/29981", "SongTitle.mp3"],
+          "42298" : ["http://browns64content.wordpress.com/2014/06/18/42298", "SongTitle.mp3"],
+          "62689" : ["http://browns64content.wordpress.com/2014/06/18/62689", "SongTitle.mp3"]
       }
     }
 }

@@ -20,6 +20,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *lufthouseTitle;
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
-- (id)initWithBeacon:(ESTBeacon *)beacon;
 
 @end

@@ -33,6 +33,13 @@
 		9B9EFA8A1942010A00F27337 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9EFA891942010A00F27337 /* Security.framework */; };
 		9B9EFA8C1942011400F27337 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9EFA8B1942011400F27337 /* CFNetwork.framework */; };
 		9B9EFA8E19424BCB00F27337 /* lufthouselogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B9EFA8D19424BCB00F27337 /* lufthouselogo.png */; };
+		9BB54975195473A300EBA968 /* app_logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9BB54974195473A300EBA968 /* app_logo.jpg */; };
+		9BB54977195476B200EBA968 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB54976195476B200EBA968 /* AVFoundation.framework */; };
+		9BB549801954949C00EBA968 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BB5497E1954949C00EBA968 /* icon.png */; };
+		9BB549811954949C00EBA968 /* retinaIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BB5497F1954949C00EBA968 /* retinaIcon.png */; };
+		9BB549831954981E00EBA968 /* spotlightIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BB549821954981E00EBA968 /* spotlightIcon.png */; };
+		9BB549851954AEF400EBA968 /* landingImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BB549841954AEF400EBA968 /* landingImage.png */; };
+		9BB549871954B11800EBA968 /* SongTitle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9BB549861954B11800EBA968 /* SongTitle.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +92,13 @@
 		9B9EFA891942010A00F27337 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9B9EFA8B1942011400F27337 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		9B9EFA8D19424BCB00F27337 /* lufthouselogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lufthouselogo.png; sourceTree = "<group>"; };
+		9BB54974195473A300EBA968 /* app_logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = app_logo.jpg; sourceTree = "<group>"; };
+		9BB54976195476B200EBA968 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		9BB5497E1954949C00EBA968 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		9BB5497F1954949C00EBA968 /* retinaIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = retinaIcon.png; sourceTree = "<group>"; };
+		9BB549821954981E00EBA968 /* spotlightIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spotlightIcon.png; sourceTree = "<group>"; };
+		9BB549841954AEF400EBA968 /* landingImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = landingImage.png; sourceTree = "<group>"; };
+		9BB549861954B11800EBA968 /* SongTitle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SongTitle.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BB54977195476B200EBA968 /* AVFoundation.framework in Frameworks */,
 				9B9EFA8C1942011400F27337 /* CFNetwork.framework in Frameworks */,
 				9B9EFA8A1942010A00F27337 /* Security.framework in Frameworks */,
 				9B9EFA88194200FC00F27337 /* SystemConfiguration.framework in Frameworks */,
@@ -141,6 +156,7 @@
 		9B1DC1431940AEAB00D58A69 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9BB54976195476B200EBA968 /* AVFoundation.framework */,
 				9B9EFA8B1942011400F27337 /* CFNetwork.framework */,
 				9B9EFA891942010A00F27337 /* Security.framework */,
 				9B9EFA87194200FC00F27337 /* SystemConfiguration.framework */,
@@ -207,7 +223,13 @@
 		9B46E163194B70E90041D9A6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9BB549841954AEF400EBA968 /* landingImage.png */,
+				9BB5497E1954949C00EBA968 /* icon.png */,
+				9BB549821954981E00EBA968 /* spotlightIcon.png */,
+				9BB5497F1954949C00EBA968 /* retinaIcon.png */,
+				9BB54974195473A300EBA968 /* app_logo.jpg */,
 				9B46E161194B643E0041D9A6 /* Lufthouse.JSON */,
+				9BB549861954B11800EBA968 /* SongTitle.mp3 */,
 				9B9EFA8D19424BCB00F27337 /* lufthouselogo.png */,
 			);
 			name = Resources;
@@ -315,10 +337,16 @@
 			files = (
 				9B46E164194B723C0041D9A6 /* Lufthouse.JSON in Resources */,
 				9B9EFA8E19424BCB00F27337 /* lufthouselogo.png in Resources */,
+				9BB549801954949C00EBA968 /* icon.png in Resources */,
 				9B1DC15B1940AEAB00D58A69 /* Main_iPad.storyboard in Resources */,
+				9BB549871954B11800EBA968 /* SongTitle.mp3 in Resources */,
 				9B1DC1601940AEAB00D58A69 /* Images.xcassets in Resources */,
 				9B1DC1581940AEAB00D58A69 /* Main_iPhone.storyboard in Resources */,
+				9BB549851954AEF400EBA968 /* landingImage.png in Resources */,
 				9B1DC14F1940AEAB00D58A69 /* InfoPlist.strings in Resources */,
+				9BB549831954981E00EBA968 /* spotlightIcon.png in Resources */,
+				9BB549811954949C00EBA968 /* retinaIcon.png in Resources */,
+				9BB54975195473A300EBA968 /* app_logo.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,6 +516,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -508,6 +537,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
