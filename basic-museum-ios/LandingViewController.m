@@ -11,9 +11,6 @@
 #import "ESTBeaconManager.h"
 #import "ESTBeaconRegion.h"
 #import "LandingViewController.h"
-#import "ContentViewController.h"
-
-
 
 @interface LandingViewController () <ESTBeaconManagerDelegate>
 
@@ -178,7 +175,7 @@
         NSError *error;
         if (nextSong != nil) {
             
-            self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:nextSong error:&error];
+            self.audioPlayer = [[AVAudioPlayer alloc] initWithData:[[NSData alloc] initWithContentsOfURL:nextSong] error:&error];
             self.audioPlayer.numberOfLoops = 0;
         
             if (self.audioPlayer == nil)
