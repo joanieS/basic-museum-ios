@@ -164,10 +164,11 @@
         
         NSError *error;
         if (nextSong != nil) {
-            
+            self.audioPlayer = nil;
             self.audioPlayer = [[AVAudioPlayer alloc] initWithData:[[NSData alloc] initWithContentsOfFile:nextSong] error:&error];
             self.audioPlayer.numberOfLoops = 0;
-        
+            self.audioPlayer.delegate = self;
+            
             if (self.audioPlayer == nil)
                 NSLog(@"%@", [error description]);
             else
