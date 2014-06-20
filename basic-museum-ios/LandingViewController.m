@@ -183,11 +183,19 @@
     NSMutableArray *beaconArray = self.contentBeaconArray;
     NSURL *beaconURL;
     NSString *url;
+    NSURLRequest *beaconRequest = nil;
     for(int i = 0; i < [beaconArray[0] count]; i++) {
         if(([checkBeacon proximity] == CLProximityNear  || [checkBeacon proximity] == CLProximityImmediate) && ![checkBeacon.minor isEqual:self.activeMinor] && [checkBeacon.minor isEqual:[[[beaconArray objectAtIndex:0] objectAtIndex:i] minor]]) {
             self.activeMinor = [[[beaconArray objectAtIndex:0] objectAtIndex:i] minor];
-            beaconURL = [NSURL URLWithString:beaconArray[1][i]];
-            NSURLRequest *beaconRequest = [NSURLRequest requestWithURL:beaconURL];
+            if([beaconArray[1][i] rangeOfString:@"http"].location == NSNotFound) {
+                beaconURL = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], beaconArray[1][i]]];
+                beaconRequest = [NSURLRequest requestWithURL:beaconURL];
+            }
+            else {
+                beaconURL = [NSURL URLWithString:beaconArray[1][i]];
+                beaconRequest = [NSURLRequest requestWithURL:beaconURL];
+            }
+            
             [self.webView loadRequest:beaconRequest];
             
             if ([[[beaconArray objectAtIndex:2] objectAtIndex:i] isEqualToString:@"nil"]) {
