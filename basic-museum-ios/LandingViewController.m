@@ -160,7 +160,7 @@
         [self performSelectorOnMainThread:@selector(updateUI:) withObject:[beacons firstObject] waitUntilDone:YES];
 }
 
--(void)doVolumeFade: (NSURL *)nextSong
+-(void)doVolumeFade: (NSString *)nextSong
 {
     if (self.audioPlayer.volume > 0.1 && [self.audioPlayer isPlaying]) {
         self.audioPlayer.volume = self.audioPlayer.volume - 0.1;
@@ -175,7 +175,7 @@
         NSError *error;
         if (nextSong != nil) {
             
-            self.audioPlayer = [[AVAudioPlayer alloc] initWithData:[[NSData alloc] initWithContentsOfURL:nextSong] error:&error];
+            self.audioPlayer = [[AVAudioPlayer alloc] initWithData:[[NSData alloc] initWithContentsOfFile:nextSong] error:&error];
             self.audioPlayer.numberOfLoops = 0;
         
             if (self.audioPlayer == nil)
@@ -190,7 +190,8 @@
 {
 
     NSMutableArray *beaconArray = self.contentBeaconArray;
-    NSURL *beaconURL, *url;
+    NSURL *beaconURL;
+    NSString *url;
     for(int i = 0; i < [beaconArray[0] count]; i++) {
         if(([checkBeacon proximity] == CLProximityNear  || [checkBeacon proximity] == CLProximityImmediate) && ![checkBeacon.minor isEqual:self.activeMinor] && [checkBeacon.minor isEqual:[[[beaconArray objectAtIndex:0] objectAtIndex:i] minor]]) {
             self.activeMinor = [[[beaconArray objectAtIndex:0] objectAtIndex:i] minor];
@@ -202,7 +203,7 @@
                 url = nil;
             }
             else {
-                url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], [[beaconArray objectAtIndex:2] objectAtIndex:i]]];
+                url = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], [[beaconArray objectAtIndex:2] objectAtIndex:i]];
             }
             
             [self doVolumeFade:url];
