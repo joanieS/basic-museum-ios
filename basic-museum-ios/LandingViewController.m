@@ -7,6 +7,7 @@
 //
 
 #import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioServices.h>
 #import "LandingViewController.h"
 #import "ESTBeaconManager.h"
 #import "ESTBeaconRegion.h"
@@ -109,17 +110,6 @@
     } @catch (NSException *exception) {
         NSLog(@"%@", exception.reason);
     }
-    
-    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Friday (Polka Version).mp3", [[NSBundle mainBundle] resourcePath]]];
-	
-	NSError *error;
-	self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-	self.audioPlayer.numberOfLoops = 0;
-	
-	if (self.audioPlayer == nil)
-		NSLog(@"%@",[error description]);
-	
-
     
 }
 
