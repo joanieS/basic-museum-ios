@@ -25,6 +25,8 @@
 		9B46E164194B723C0041D9A6 /* Lufthouse.JSON in Resources */ = {isa = PBXBuildFile; fileRef = 9B46E161194B643E0041D9A6 /* Lufthouse.JSON */; };
 		9B72C1F71950B74A004C3617 /* LufthouseTour.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B72C1F61950B74A004C3617 /* LufthouseTour.m */; };
 		9B72C1FA1950C00F004C3617 /* LufthouseCustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B72C1F91950C00F004C3617 /* LufthouseCustomer.m */; };
+		9B8795681958C52D000ACA97 /* testImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9B8795671958C52D000ACA97 /* testImage.jpg */; };
+		9B87956A1958F176000ACA97 /* ManalAlSharif_2013G-480p.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9B8795691958F176000ACA97 /* ManalAlSharif_2013G-480p.mp4 */; };
 		9B9EFA7B1941FEF100F27337 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9EFA7A1941FEF100F27337 /* CoreBluetooth.framework */; };
 		9B9EFA7D1941FEFE00F27337 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9EFA7C1941FEFE00F27337 /* CoreLocation.framework */; };
 		9B9EFA861941FF3000F27337 /* libEstimoteSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9EFA851941FF3000F27337 /* libEstimoteSDK.a */; };
@@ -77,6 +79,8 @@
 		9B72C1F61950B74A004C3617 /* LufthouseTour.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LufthouseTour.m; sourceTree = "<group>"; };
 		9B72C1F81950C00F004C3617 /* LufthouseCustomer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LufthouseCustomer.h; sourceTree = "<group>"; };
 		9B72C1F91950C00F004C3617 /* LufthouseCustomer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LufthouseCustomer.m; sourceTree = "<group>"; };
+		9B8795671958C52D000ACA97 /* testImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testImage.jpg; sourceTree = "<group>"; };
+		9B8795691958F176000ACA97 /* ManalAlSharif_2013G-480p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ManalAlSharif_2013G-480p.mp4"; sourceTree = SOURCE_ROOT; };
 		9B9EFA7A1941FEF100F27337 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		9B9EFA7C1941FEFE00F27337 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		9B9EFA801941FF3000F27337 /* ESTBeacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTBeacon.h; sourceTree = "<group>"; };
@@ -218,7 +222,9 @@
 		9B46E163194B70E90041D9A6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9B8795691958F176000ACA97 /* ManalAlSharif_2013G-480p.mp4 */,
 				9BB549841954AEF400EBA968 /* landingImage.png */,
+				9B8795671958C52D000ACA97 /* testImage.jpg */,
 				9BB5497E1954949C00EBA968 /* icon.png */,
 				9BB549821954981E00EBA968 /* spotlightIcon.png */,
 				9BB5497F1954949C00EBA968 /* retinaIcon.png */,
@@ -337,11 +343,13 @@
 				9BB549871954B11800EBA968 /* SongTitle.mp3 in Resources */,
 				9B1DC1601940AEAB00D58A69 /* Images.xcassets in Resources */,
 				9B1DC1581940AEAB00D58A69 /* Main_iPhone.storyboard in Resources */,
+				9B8795681958C52D000ACA97 /* testImage.jpg in Resources */,
 				9BB549851954AEF400EBA968 /* landingImage.png in Resources */,
 				9B1DC14F1940AEAB00D58A69 /* InfoPlist.strings in Resources */,
 				9BB549831954981E00EBA968 /* spotlightIcon.png in Resources */,
 				9BB549811954949C00EBA968 /* retinaIcon.png in Resources */,
 				9BB54975195473A300EBA968 /* app_logo.jpg in Resources */,
+				9B87956A1958F176000ACA97 /* ManalAlSharif_2013G-480p.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

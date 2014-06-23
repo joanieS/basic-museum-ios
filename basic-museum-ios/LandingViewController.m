@@ -34,6 +34,7 @@
 
 //Keeps track of whether or not an exhibit's content is currently being displayed
 @property BOOL hasLanded;
+@property BOOL shouldRotate;
 
 @end
 
@@ -60,7 +61,7 @@
         NSArray *outterKeys = [results allKeys];
         NSArray *innerKeys, *valueKeys;
         
-        NSMutableArray *beaconIDs, *beaconValues, *beaconAudio, *tours, *customers;
+        NSMutableArray *beaconIDs, *beaconValues, *beaconAudio, *beaconTypes, *tours, *customers;
         
         LufthouseCustomer *tempCustomer;
         LufthouseTour *tempTour;
@@ -73,14 +74,16 @@
                 valueKeys = [[[results objectForKey:outterKey] objectForKey:innerKey] allKeys];
                 beaconIDs = [NSMutableArray array];
                 beaconValues = [NSMutableArray array];
+                beaconTypes = [NSMutableArray array];
                 beaconAudio = [NSMutableArray array];
                 for (NSString *valueKey in valueKeys) {
                     [beaconIDs addObject:valueKey];
                     [beaconValues addObject:[[[[results objectForKey:outterKey] objectForKey:innerKey] objectForKey:valueKey] objectAtIndex: 0]];
-                    [beaconAudio addObject: [[[[results objectForKey:outterKey] objectForKey:innerKey] objectForKey:valueKey] objectAtIndex: 1]];
+                    [beaconTypes addObject:[[[[results objectForKey:outterKey] objectForKey:innerKey] objectForKey:valueKey] objectAtIndex:1]];
+                    [beaconAudio addObject: [[[[results objectForKey:outterKey] objectForKey:innerKey] objectForKey:valueKey] objectAtIndex: 2]];
                     
                 }
-                tempTour = [[LufthouseTour alloc] initTourWithName:innerKey beaconIDArray:beaconIDs beaconContentArray:beaconValues beaconAudioArray: beaconAudio];
+                tempTour = [[LufthouseTour alloc] initTourWithName:innerKey beaconIDArray:beaconIDs beaconContentArray:beaconValues beaconContentTypeArray:beaconTypes beaconAudioArray:beaconAudio];
                 [tours addObject:tempTour];
             }
             tempCustomer = [[LufthouseCustomer alloc] initWithCustomerName:outterKey customerTours:tours];
@@ -96,7 +99,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.shouldRotate = NO;
     self.hasLanded = false;
     
     self.beaconManager = [[ESTBeaconManager alloc] init];
@@ -122,7 +125,7 @@
 
         ESTBeacon *currentBeacon;
         NSString *stringifiedMinor;
-        NSMutableArray *beaconAssignment = [NSMutableArray arrayWithObjects:[NSMutableArray array], [NSMutableArray array], [NSMutableArray array], nil];
+        NSMutableArray *beaconAssignment = [NSMutableArray arrayWithObjects:[NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], nil];
         NSInteger beaconIndex = -1;
         LufthouseTour *currentTour;
         
@@ -136,7 +139,8 @@
                     if (beaconIndex != -1) {
                         [beaconAssignment[0] addObject:currentBeacon];
                         [beaconAssignment[1] addObject:[currentTour getBeaconContentAtIndex:beaconIndex]];
-                        [beaconAssignment[2] addObject:[currentTour getBeaconAudioAtIndex:beaconIndex]];
+                        [beaconAssignment[2] addObject:[currentTour getBeaconContentTypeAtIndex:beaconIndex]];
+                        [beaconAssignment[3] addObject:[currentTour getBeaconAudioAtIndex:beaconIndex]];
                         NSLog(@"%s", "Beacon matched!");
                     }
                 }
@@ -167,7 +171,7 @@
             self.audioPlayer = nil;
             self.audioPlayer = [[AVAudioPlayer alloc] initWithData:[[NSData alloc] initWithContentsOfFile:nextSong] error:&error];
             self.audioPlayer.numberOfLoops = 0;
-            self.audioPlayer.delegate = self;
+//            self.audioPlayer.delegate = self;
             
             if (self.audioPlayer == nil)
                 NSLog(@"%@", [error description]);
@@ -187,16 +191,25 @@
     for(int i = 0; i < [beaconArray[0] count]; i++) {
         if(([checkBeacon proximity] == CLProximityNear  || [checkBeacon proximity] == CLProximityImmediate) && ![checkBeacon.minor isEqual:self.activeMinor] && [checkBeacon.minor isEqual:[[[beaconArray objectAtIndex:0] objectAtIndex:i] minor]]) {
             self.activeMinor = [[[beaconArray objectAtIndex:0] objectAtIndex:i] minor];
-            if([beaconArray[1][i] rangeOfString:@"http"].location == NSNotFound) {
+            if(!([beaconArray[2][i] rangeOfString:@"image"].location == NSNotFound)) {
                 beaconURL = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], beaconArray[1][i]]];
                 beaconRequest = [NSURLRequest requestWithURL:beaconURL];
+                [self.webView loadRequest:beaconRequest];
             }
-            else {
+            else if(!([beaconArray[2][i] rangeOfString:@"web-video"].location == NSNotFound)) {
+                [self playVideoWithId:beaconArray[1][i]];
+            }
+            else if(!([beaconArray[2][i] rangeOfString:@"local-video"].location == NSNotFound)) {
+                beaconURL = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], beaconArray[1][i]]];
+                beaconRequest = [NSURLRequest requestWithURL:beaconURL];
+                [self.webView loadRequest:beaconRequest];
+            }
+            else if(!([beaconArray[2][i] rangeOfString:@"web"].location == NSNotFound)) {
                 beaconURL = [NSURL URLWithString:beaconArray[1][i]];
                 beaconRequest = [NSURLRequest requestWithURL:beaconURL];
+                [self.webView loadRequest:beaconRequest];
+                NSLog(@"%@", beaconRequest);
             }
-            
-            [self.webView loadRequest:beaconRequest];
             
             if ([[[beaconArray objectAtIndex:2] objectAtIndex:i] isEqualToString:@"nil"]) {
                 url = nil;
@@ -208,6 +221,7 @@
             [self doVolumeFade:url];
             
             self.hasLanded = false;
+            self.shouldRotate = YES;
         }
     }
     if (checkBeacon == nil && self.hasLanded == false) {
@@ -217,8 +231,25 @@
         [self doVolumeFade:nil];
         self.hasLanded = true;
         self.activeMinor = 0000;
+        self.shouldRotate = NO;
     }
 }
+
+- (BOOL)shouldAutorotate {
+    if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation) &&  self.shouldRotate == NO) {
+        return YES;
+    }
+    else
+        return self.shouldRotate;
+}
+
+- (void)playVideoWithId:(NSString *)videoId {
+    static NSString *youTubeVideoHTML = @"<html><head><style>body{margin:0px 0px 0px 0px;}</style></head> <body> <div id=\"player\"></div> <script> var tag = document.createElement('script'); tag.src = 'http://www.youtube.com/player_api'; var firstScriptTag = document.getElementsByTagName('script')[0]; firstScriptTag.parentNode.insertBefore(tag, firstScriptTag); var player; function onYouTubePlayerAPIReady() { player = new YT.Player('player', { width:'%0.0f', height:'%0.0f', videoId:'%@', events: { 'onReady': onPlayerReady } }); } function onPlayerReady(event) { event.target.playVideo(); } </script> </body> </html>";
+    NSString *html = [NSString stringWithFormat:youTubeVideoHTML, self.webView.frame.size.width, self.webView.frame.size.height, videoId];
+    
+    [self.webView loadHTMLString:html baseURL:[[NSBundle mainBundle] resourceURL]];
+}
+
 
 //- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 //{

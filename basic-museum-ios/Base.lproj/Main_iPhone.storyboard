@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lufthouse" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yH7-Hq-dTc">
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Lufthouse" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yH7-Hq-dTc">
                                 <rect key="frame" x="91" y="351" width="139" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -24,17 +24,26 @@
                                 <color key="textColor" red="0.054901960784313725" green="0.26666666666666666" blue="0.48627450980392156" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="lufthouselogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="FfF-yt-kWM">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="lufthouselogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="FfF-yt-kWM">
                                 <rect key="frame" x="69" y="160" width="183" height="183"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <webView contentMode="bottom" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z5g-MF-lLy">
+                            <webView contentMode="bottom" mediaPlaybackRequiresUserAction="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z5g-MF-lLy">
                                 <rect key="frame" x="0.0" y="20" width="320" height="550"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES" address="YES"/>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Z5g-MF-lLy" firstAttribute="top" secondItem="Nmp-No-kji" secondAttribute="top" constant="20" symbolic="YES" id="K8b-RF-nga"/>
+                            <constraint firstItem="Z5g-MF-lLy" firstAttribute="centerX" secondItem="FfF-yt-kWM" secondAttribute="centerX" id="XLN-mk-atU"/>
+                            <constraint firstAttribute="bottom" secondItem="Z5g-MF-lLy" secondAttribute="bottom" constant="-2" id="bCy-7u-DEI"/>
+                            <constraint firstItem="Z5g-MF-lLy" firstAttribute="centerX" secondItem="yH7-Hq-dTc" secondAttribute="centerX" id="fkf-HN-gYh"/>
+                            <constraint firstAttribute="trailing" secondItem="Z5g-MF-lLy" secondAttribute="trailing" id="jeq-ow-B6x"/>
+                            <constraint firstItem="Z5g-MF-lLy" firstAttribute="leading" secondItem="Nmp-No-kji" secondAttribute="leading" id="rWl-aq-cPy"/>
+                        </constraints>
                         <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                         <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     </view>
@@ -42,7 +51,7 @@
                         <outlet property="landingView" destination="Nmp-No-kji" id="NR6-Gk-yPF"/>
                         <outlet property="lufhouseLogo" destination="FfF-yt-kWM" id="TAS-xb-K6u"/>
                         <outlet property="lufthouseTitle" destination="yH7-Hq-dTc" id="zoZ-60-9ZQ"/>
-                        <outlet property="webView" destination="Z5g-MF-lLy" id="GEK-4E-Ggc"/>
+                        <outlet property="webView" destination="Z5g-MF-lLy" id="2Aq-7t-XvW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
