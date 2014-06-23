@@ -1,18 +1,18 @@
 {
-  "WRHS": {
+  "Customer": {
       "demo": {
-          "35084" : ["http://browns64content.wordpress.com/2014/06/18/35084", "SongTitle.mp3"],
-          "47934" : ["http://browns64content.wordpress.com/2014/06/18/47934", "SongTitle.mp3"],
-          "47919" : ["http://browns64content.wordpress.com/2014/06/18/47919", "SongTitle.mp3"],
-          "39720" : ["http://browns64content.wordpress.com/2014/06/18/39720", "nil"],
-          "4642"  : ["http://browns64content.wordpress.com/2014/06/18/4642", "SongTitle.mp3"],
-          "5144"  : ["http://browns64content.wordpress.com/2014/06/18/5144", "SongTitle.mp3"],
-          "62443" : ["http://browns64content.wordpress.com/2014/06/18/62443", "SongTitle.mp3"],
-          "65535" : ["http://browns64content.wordpress.com/2014/06/18/65535", "SongTitle.mp3"],
-          "19734" : ["http://browns64content.wordpress.com/2014/06/18/19734", "SongTitle.mp3"],
-          "29981" : ["http://browns64content.wordpress.com/2014/06/18/29981", "SongTitle.mp3"],
-          "42298" : ["http://browns64content.wordpress.com/2014/06/18/42298", "SongTitle.mp3"],
-          "62689" : ["http://browns64content.wordpress.com/2014/06/18/62689", "SongTitle.mp3"]
+          "35084" : ["testImage.jpg", "image", "SongTitle.mp3"],
+          "39720" : ["rVeMiVU77wo", "web-video", "nil"],
+          "65535" : ["ManalAlSharif_2013G-480p.mp4", "local-video", "nil"],
+          "47934" : ["http://browns64content.wordpress.com/2014/06/18/47934", "web", "SongTitle.mp3"],
+          "47919" : ["http://browns64content.wordpress.com/2014/06/18/47919", "web", "SongTitle.mp3"],
+          "4642"  : ["http://browns64content.wordpress.com/2014/06/18/4642", "web", "SongTitle.mp3"],
+          "5144"  : ["http://browns64content.wordpress.com/2014/06/18/5144", "web", "SongTitle.mp3"],
+          "62443" : ["http://browns64content.wordpress.com/2014/06/18/62443", "web", "SongTitle.mp3"],
+          "19734" : ["http://browns64content.wordpress.com/2014/06/18/19734", "web", "SongTitle.mp3"],
+          "29981" : ["http://browns64content.wordpress.com/2014/06/18/29981", "web", "SongTitle.mp3"],
+          "42298" : ["http://browns64content.wordpress.com/2014/06/18/42298", "web", "SongTitle.mp3"],
+          "62689" : ["http://browns64content.wordpress.com/2014/06/18/62689", "web", "SongTitle.mp3"]
       }
     }
 }

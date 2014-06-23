@@ -10,11 +10,12 @@
 
 @implementation LufthouseTour
 
--(LufthouseTour *)initTourWithName: (NSString *) tourName beaconIDArray: (NSMutableArray *) beaconIDs beaconContentArray: (NSMutableArray *) beaconContent beaconAudioArray: (NSMutableArray *) beaconAudio
+-(LufthouseTour *)initTourWithName: (NSString *) tourName beaconIDArray: (NSMutableArray *) beaconIDs beaconContentArray: (NSMutableArray *) beaconContent beaconContentTypeArray: (NSMutableArray *) beaconContentType beaconAudioArray: (NSMutableArray *) beaconAudio
 {
     self.tourName = tourName;
     self.beaconIDs = beaconIDs;
     self.beaconContent = beaconContent;
+    self.beaconContentType = beaconContentType;
     self.beaconAudio = beaconAudio;
     
     return self;
@@ -33,6 +34,11 @@
 -(NSString *)getBeaconContentAtIndex: (NSInteger) index
 {
     return [self.beaconContent objectAtIndex:index];
+}
+
+-(NSString *)getBeaconContentTypeAtIndex: (NSInteger) index
+{
+    return [self.beaconContentType objectAtIndex:index];
 }
 
 -(NSString *)getBeaconAudioAtIndex: (NSInteger) index
