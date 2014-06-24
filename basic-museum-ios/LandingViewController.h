@@ -26,9 +26,8 @@
 
 @interface LandingViewController : UIViewController
 
+
 @property (strong, nonatomic) IBOutlet UIView *landingView;
-@property (weak, nonatomic) IBOutlet UIImageView *lufhouseLogo;
-@property (weak, nonatomic) IBOutlet UILabel *lufthouseTitle;
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *waiting;
 

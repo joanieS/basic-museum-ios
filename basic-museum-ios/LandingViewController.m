@@ -56,7 +56,12 @@
     self.shouldRotate = NO;
     self.hasLanded = false;
     
+    //Setup webView and go to the landingImage
+    //@TODO: Get the first load out of viewDidLoad
     self.webView.delegate = self;
+    NSURL *beaconURL = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], @"landingImage.png"]];
+    NSURLRequest *beaconRequest = [NSURLRequest requestWithURL:beaconURL];
+    [self.webView loadRequest:beaconRequest];
     
     // Setup beacon manager as this controller
     self.beaconManager = [[ESTBeaconManager alloc] init];
@@ -148,28 +153,34 @@
 }
 
 /* beaconManager
- *
+ * If content hasn't been loaded, then we load the content and check nearby beacons off of it.
  */
 - (void)beaconManager:(ESTBeaconManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(ESTBeaconRegion *)region
     {
+        //If content hasn't been loaded
         if ([self.beaconContent count] == 0) {
             [self loadBeaconData];
             NSLog(@"Beacon content loaded");
         }
 
-        ESTBeacon *currentBeacon;
-        NSString *stringifiedMinor;
+        ESTBeacon *currentBeacon;       //Beacon to check against
+        NSString *stringifiedMinor;     //String type of currentBeacon's minor value
+        //Create array containing all relevant information about the matched beacon and its content
         NSMutableArray *beaconAssignment = [NSMutableArray arrayWithObjects:[NSMutableArray array], [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], nil];
         NSInteger beaconIndex = -1;
         LufthouseTour *currentTour;
         
+        //For each beacon in range
         for(int i = 0; i < [beacons count]; i++){
             currentBeacon = [beacons objectAtIndex:i];
             stringifiedMinor = [NSString stringWithFormat:@"%@", [currentBeacon minor]];
+            //For each customer we know of
             for (LufthouseCustomer *customer in self.beaconContent) {
+                //For each customer tour
                 for (NSInteger tourIndex = 0; tourIndex < [[customer getTours] count]; tourIndex++) {
                     currentTour = [customer getTourAtIndex:tourIndex];
                     beaconIndex = [currentTour findIndexOfID:stringifiedMinor];
+                    //If we can find the beacon, grab the data
                     if (beaconIndex != -1) {
                         [beaconAssignment[0] addObject:currentBeacon];
                         [beaconAssignment[1] addObject:[currentTour getBeaconContentAtIndex:beaconIndex]];
@@ -180,7 +191,7 @@
                 }
             }
         }
-        
+        //If we found a matched beacon, then set it up for loading
         if ([beaconAssignment[0] count] > 0) {
             self.contentBeaconArray = beaconAssignment;
         }
@@ -188,63 +199,50 @@
         [self performSelectorOnMainThread:@selector(updateUI:) withObject:[beacons firstObject] waitUntilDone:YES];
 }
 
--(void)doVolumeFade: (NSString *)nextSong
-{
-    if (self.audioPlayer.volume > 0.1 && [self.audioPlayer isPlaying]) {
-        self.audioPlayer.volume = self.audioPlayer.volume - 0.1;
-        [self performSelector:@selector(doVolumeFade:) withObject:nextSong afterDelay:0.1];
-    } else {
-        // Stop and get the sound ready for playing again
-        [self.audioPlayer stop];
-        self.audioPlayer.currentTime = 0;
-        [self.audioPlayer prepareToPlay];
-        self.audioPlayer.volume = 1.0;
-        
-        NSError *error;
-        if (nextSong != nil) {
-            self.audioPlayer = nil;
-            self.audioPlayer = [[AVAudioPlayer alloc] initWithData:[[NSData alloc] initWithContentsOfFile:nextSong] error:&error];
-            self.audioPlayer.numberOfLoops = 0;
-//            self.audioPlayer.delegate = self;
-            
-            if (self.audioPlayer == nil)
-                NSLog(@"%@", [error description]);
-            else
-                [self.audioPlayer play];
-        }
-    }
-}
 
+/* updateUI
+ * Gets the closest beacon and displays content of the nearest beacon
+ */
 - (void)updateUI:(ESTBeacon *)checkBeacon
 {
-
+    //Get the array of nearby beacons and their content
     NSMutableArray *beaconArray = self.contentBeaconArray;
+    //Variables for loading content in the UIWebView
     NSURL *beaconURL;
     NSString *url;
     NSURLRequest *beaconRequest = nil;
+    
+    //For each beacon we ranged and matched
     for(int i = 0; i < [beaconArray[0] count]; i++) {
+        //If our proximity is immediate, the beacon isn't currently on display, and the beacon is the closest
         if(([checkBeacon proximity] == CLProximityImmediate) && ![checkBeacon.minor isEqual:self.activeMinor] && [checkBeacon.minor isEqual:[[[beaconArray objectAtIndex:0] objectAtIndex:i] minor]]) {
+            //Set the active beacon being displayed
             self.activeMinor = [[[beaconArray objectAtIndex:0] objectAtIndex:i] minor];
+
+            //If the content is an image, load it as an image
             if(!([beaconArray[2][i] rangeOfString:@"image"].location == NSNotFound)) {
                 beaconURL = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], beaconArray[1][i]]];
                 beaconRequest = [NSURLRequest requestWithURL:beaconURL];
                 [self.webView loadRequest:beaconRequest];
             }
+            //If the content is an online video, embed it and play
             else if(!([beaconArray[2][i] rangeOfString:@"web-video"].location == NSNotFound)) {
                 [self playVideoWithId:beaconArray[1][i]];
             }
+            //If the content is a local video, load it in WebView
             else if(!([beaconArray[2][i] rangeOfString:@"local-video"].location == NSNotFound)) {
                 beaconURL = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], beaconArray[1][i]]];
                 beaconRequest = [NSURLRequest requestWithURL:beaconURL];
                 [self.webView loadRequest:beaconRequest];
             }
+            //If the content is a web page, load it
             else if(!([beaconArray[2][i] rangeOfString:@"web"].location == NSNotFound)) {
                 beaconURL = [NSURL URLWithString:beaconArray[1][i]];
                 beaconRequest = [NSURLRequest requestWithURL:beaconURL];
                 [self.webView loadRequest:beaconRequest];
-                NSLog(@"%@", beaconRequest);
             }
             
+            //If there is no audio to play, then send no audio
             if ([[[beaconArray objectAtIndex:2] objectAtIndex:i] isEqualToString:@"nil"]) {
                 url = nil;
             }
@@ -252,13 +250,17 @@
                 url = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], [[beaconArray objectAtIndex:2] objectAtIndex:i]];
             }
             
+            //Transition into the next song with an audio fade
             [self doVolumeFade:url];
             
+            //Assert we are not on the landing image and that we can rotate here
             self.hasLanded = false;
             self.shouldRotate = YES;
         }
     }
+    //If there are no beacons to display, go to the landing image
     if (checkBeacon == nil && self.hasLanded == false) {
+        //Load the image, transition to no audio, set the landed option, reset the active beacon, and restrict rotation
         beaconURL = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], @"landingImage.png"]];
         NSURLRequest *beaconRequest = [NSURLRequest requestWithURL:beaconURL];
         [self.webView loadRequest:beaconRequest];
@@ -269,7 +271,54 @@
     }
 }
 
+/* doVolumeFade
+ * Given the next song path, transition between the current and next songs with an audio fade
+ */
+-(void)doVolumeFade: (NSString *)nextSong
+{
+    //If a song is playing, fade out
+    if (self.audioPlayer.volume > 0.1 && [self.audioPlayer isPlaying]) {
+        self.audioPlayer.volume = self.audioPlayer.volume - 0.05;
+        [self performSelector:@selector(doVolumeFade:) withObject:nextSong afterDelay:0.05];
+    } else {    //Once it's done fading, prep and play
+        [self.audioPlayer stop];
+        self.audioPlayer.currentTime = 0;
+        [self.audioPlayer prepareToPlay];
+        self.audioPlayer.volume = 1.0;
+        
+        
+        NSError *error;
+        if (nextSong != nil) {
+            self.audioPlayer = nil;
+            self.audioPlayer = [[AVAudioPlayer alloc] initWithData:[[NSData alloc] initWithContentsOfFile:nextSong] error:&error];
+            self.audioPlayer.numberOfLoops = 0; //Don't loop
+            
+            if (self.audioPlayer == nil)
+                NSLog(@"%@", [error description]);
+            else
+                [self.audioPlayer play];
+        }
+    }
+}
+
+/* playVideoWithId
+ * Given a videoId from YouTube, play an embedded version of the video
+ */
+- (void)playVideoWithId:(NSString *)videoId {
+    //Super long HTML for the player
+    static NSString *youTubeVideoHTML = @"<html><head><style>body{margin:0px 0px 0px 0px;}</style></head> <body> <div id=\"player\"></div> <script> var tag = document.createElement('script'); tag.src = 'http://www.youtube.com/player_api'; var firstScriptTag = document.getElementsByTagName('script')[0]; firstScriptTag.parentNode.insertBefore(tag, firstScriptTag); var player; function onYouTubePlayerAPIReady() { player = new YT.Player('player', { width:'%0.0f', height:'%0.0f', videoId:'%@' }); } </script> </body> </html>";
+    //Format the html for the player
+    NSString *html = [NSString stringWithFormat:youTubeVideoHTML, self.webView.frame.size.width, self.webView.frame.size.height, videoId];
+    
+    //Load, baby, load!
+    [self.webView loadHTMLString:html baseURL:[[NSBundle mainBundle] resourceURL]];
+}
+
+/* shouldAutorotate
+ * Allows for rotation when specified or when we're not oriented the right way
+ */
 - (BOOL)shouldAutorotate {
+    //If we aren't showing content but we are horizontal
     if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation) &&  self.shouldRotate == NO) {
         return YES;
     }
@@ -277,18 +326,17 @@
         return self.shouldRotate;
 }
 
-- (void)playVideoWithId:(NSString *)videoId {
-    static NSString *youTubeVideoHTML = @"<html><head><style>body{margin:0px 0px 0px 0px;}</style></head> <body> <div id=\"player\"></div> <script> var tag = document.createElement('script'); tag.src = 'http://www.youtube.com/player_api'; var firstScriptTag = document.getElementsByTagName('script')[0]; firstScriptTag.parentNode.insertBefore(tag, firstScriptTag); var player; function onYouTubePlayerAPIReady() { player = new YT.Player('player', { width:'%0.0f', height:'%0.0f', videoId:'%@' }); } </script> </body> </html>";
-    NSString *html = [NSString stringWithFormat:youTubeVideoHTML, self.webView.frame.size.width, self.webView.frame.size.height, videoId];
-    
-    [self.webView loadHTMLString:html baseURL:[[NSBundle mainBundle] resourceURL]];
-}
-
+/* webViewDidStartLoad
+ * Provides loading animation
+ */
 - (void)webViewDidStartLoad:(UIWebView *)webView {
     [self.waiting startAnimating];
     self.waiting.hidden = FALSE;
 }
 
+/* webViewDidFinishLoad
+ * Stops loading animation
+ */
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [self.waiting stopAnimating];
     self.waiting.hidden = TRUE;
