@@ -6,12 +6,9 @@
 //  Copyright (c) 2014 Lufthouse. All rights reserved.
 //
 
-#import <AVFoundation/AVFoundation.h>
-#import <AudioToolbox/AudioServices.h>
+
 #import "LandingViewController.h"
-#import "ESTBeaconManager.h"
-#import "ESTBeaconRegion.h"
-#import "LandingViewController.h"
+
 
 @interface LandingViewController () <ESTBeaconManagerDelegate>
 
@@ -24,98 +21,135 @@
 @property (nonatomic, strong) NSNumber          *activeMinor;
 
 //Contains all information regarding beacons in range and their content
-@property NSMutableArray * contentBeaconArray;
+@property (nonatomic, strong) NSMutableArray    *contentBeaconArray;
 
 //Contains all information from the loaded JSON
-@property NSMutableArray * beaconContent;
+@property (nonatomic, strong) NSMutableArray    *beaconContent;
 
 //Audio player for playing mp3 files at exhibits
-@property AVAudioPlayer *audioPlayer;
+@property (nonatomic, strong) AVAudioPlayer     *audioPlayer;
 
 //Keeps track of whether or not an exhibit's content is currently being displayed
-@property BOOL hasLanded;
-@property BOOL shouldRotate;
+@property (nonatomic) BOOL                      hasLanded;
+
+//Allows the orientation to rotate if YES
+@property (nonatomic) BOOL                      shouldRotate;
 
 @end
 
 
-
+/* LandingViewController
+ * Currently the one and only view controller, this takes care of all beacon management
+ * and content displaying.
+ * @TODO Implement additional view controllers for customer, tours, modes, etc.
+ */
 @implementation LandingViewController
 
+/* viewDidLoad
+ * On starting up, start beacon managing and ranging
+ */
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    // Turn rotation off and affirm we have not hit the landing screen yet
+    self.shouldRotate = NO;
+    self.hasLanded = false;
+    
+    self.webView.delegate = self;
+    
+    // Setup beacon manager as this controller
+    self.beaconManager = [[ESTBeaconManager alloc] init];
+    self.beaconManager.delegate = self;
+    
+    // Create a region to search for beacons
+    self.beaconRegion = [[ESTBeaconRegion alloc] initWithProximityUUID:ESTIMOTE_PROXIMITY_UUID identifier:@"RegionIdentifier"];
+    @try {
+        [self.beaconManager startMonitoringForRegion:self.beaconRegion];
+        [self.beaconManager startRangingBeaconsInRegion:self.beaconRegion];
+    } @catch (NSException *exception) {
+        NSLog(@"%@", exception.reason);
+    }
+}
 
 /* loadBeaconData
  * Retrieves JSON file from a source (currently local Lufthouse.JSON) and reads
  * the file into LufthouseCustomer and LufthouseTour objects.
  */
-
 -(void)loadBeaconData
 {
+    // Create filepath to the local JSON
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Lufthouse" ofType:@"JSON"];
+    // Begin reading JSON
     NSData *beaconJSON = [[NSData alloc] initWithContentsOfFile:filePath];
     NSError *error = nil;
     id json = [NSJSONSerialization JSONObjectWithData:beaconJSON options:0 error:&error];
 
+    // If JSON didn't blow up
     if([json isKindOfClass:[NSDictionary class]]){
-        
+        // Create a dictionary out of the JSON
         NSDictionary *results = json;
+        // All key values for the three layers to the JSON
         NSArray *outterKeys = [results allKeys];
         NSArray *innerKeys, *valueKeys;
         
+        /* Arrays to hold data before storing it into tours, customers, and ulimately
+         * self.beaconContent
+         */
         NSMutableArray *beaconIDs, *beaconValues, *beaconAudio, *beaconTypes, *tours, *customers;
         
+        //Temporary customer and tour
         LufthouseCustomer *tempCustomer;
         LufthouseTour *tempTour;
         
+        //Clear customers for all incoming new customers
         customers = [NSMutableArray array];
+        
+        //For each customer in the JSON
         for (NSString *outterKey in outterKeys) {
+            //Get the tour names
             innerKeys = [[results objectForKey:outterKey] allKeys];
+            //Prep tours for storing new tours
             tours = [NSMutableArray array];
+            
+            //For each tour in a customer
             for (NSString *innerKey in innerKeys) {
+                //Get all beacons in the tour
                 valueKeys = [[[results objectForKey:outterKey] objectForKey:innerKey] allKeys];
+                
+                //Prep for data
                 beaconIDs = [NSMutableArray array];
                 beaconValues = [NSMutableArray array];
                 beaconTypes = [NSMutableArray array];
                 beaconAudio = [NSMutableArray array];
+                
+                //For each beacon in a tour
                 for (NSString *valueKey in valueKeys) {
+                    //Add the id, content, content type, and audio
                     [beaconIDs addObject:valueKey];
                     [beaconValues addObject:[[[[results objectForKey:outterKey] objectForKey:innerKey] objectForKey:valueKey] objectAtIndex: 0]];
                     [beaconTypes addObject:[[[[results objectForKey:outterKey] objectForKey:innerKey] objectForKey:valueKey] objectAtIndex:1]];
                     [beaconAudio addObject: [[[[results objectForKey:outterKey] objectForKey:innerKey] objectForKey:valueKey] objectAtIndex: 2]];
-                    
                 }
+                //Create a tour out of all the data just loaded
                 tempTour = [[LufthouseTour alloc] initTourWithName:innerKey beaconIDArray:beaconIDs beaconContentArray:beaconValues beaconContentTypeArray:beaconTypes beaconAudioArray:beaconAudio];
+                //Add tempTour to the list of tours the customer has
                 [tours addObject:tempTour];
             }
+            //Create a customer using the parsed tours and a name
             tempCustomer = [[LufthouseCustomer alloc] initWithCustomerName:outterKey customerTours:tours];
+            //Add the customer to a list of all customers
             [customers addObject:tempCustomer];
         }
         
+        //Assign the beacon content for access elsewhere
         self.beaconContent = customers;
-        
     }
 }
 
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    self.shouldRotate = NO;
-    self.hasLanded = false;
-    
-    self.beaconManager = [[ESTBeaconManager alloc] init];
-    self.beaconManager.delegate = self;
-    
-    self.beaconRegion = [[ESTBeaconRegion alloc] initWithProximityUUID:ESTIMOTE_PROXIMITY_UUID
-                         identifier:@"RegionIdentifier"];
-    @try {
-    [self.beaconManager startMonitoringForRegion:self.beaconRegion];
-    [self.beaconManager startRangingBeaconsInRegion:self.beaconRegion];
-    } @catch (NSException *exception) {
-        NSLog(@"%@", exception.reason);
-    }
-    
-}
-
+/* beaconManager
+ *
+ */
 - (void)beaconManager:(ESTBeaconManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(ESTBeaconRegion *)region
     {
         if ([self.beaconContent count] == 0) {
@@ -141,7 +175,7 @@
                         [beaconAssignment[1] addObject:[currentTour getBeaconContentAtIndex:beaconIndex]];
                         [beaconAssignment[2] addObject:[currentTour getBeaconContentTypeAtIndex:beaconIndex]];
                         [beaconAssignment[3] addObject:[currentTour getBeaconAudioAtIndex:beaconIndex]];
-                        NSLog(@"%s", "Beacon matched!");
+                        NSLog(@"Beacon matched! %@", [currentBeacon minor] );
                     }
                 }
             }
@@ -189,7 +223,7 @@
     NSString *url;
     NSURLRequest *beaconRequest = nil;
     for(int i = 0; i < [beaconArray[0] count]; i++) {
-        if(([checkBeacon proximity] == CLProximityNear  || [checkBeacon proximity] == CLProximityImmediate) && ![checkBeacon.minor isEqual:self.activeMinor] && [checkBeacon.minor isEqual:[[[beaconArray objectAtIndex:0] objectAtIndex:i] minor]]) {
+        if(([checkBeacon proximity] == CLProximityImmediate) && ![checkBeacon.minor isEqual:self.activeMinor] && [checkBeacon.minor isEqual:[[[beaconArray objectAtIndex:0] objectAtIndex:i] minor]]) {
             self.activeMinor = [[[beaconArray objectAtIndex:0] objectAtIndex:i] minor];
             if(!([beaconArray[2][i] rangeOfString:@"image"].location == NSNotFound)) {
                 beaconURL = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], beaconArray[1][i]]];
@@ -250,6 +284,15 @@
     [self.webView loadHTMLString:html baseURL:[[NSBundle mainBundle] resourceURL]];
 }
 
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    [self.waiting startAnimating];
+    self.waiting.hidden = FALSE;
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [self.waiting stopAnimating];
+    self.waiting.hidden = TRUE;
+}
 
 //- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 //{

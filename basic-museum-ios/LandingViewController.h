@@ -7,8 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+/* Audio playing capability */
+#import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioServices.h>
+
+/* JSON Parsing */
 #import <Foundation/NSJSONSerialization.h>
+
+/* Estimote managing */
 #import "ESTBeacon.h"
+#import "ESTBeaconManager.h"
+#import "ESTBeaconRegion.h"
+
+/* Parsing and storing information */
 #import "LufthouseCustomer.h"
 #import "LufthouseTour.h"
 
@@ -19,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *lufhouseLogo;
 @property (weak, nonatomic) IBOutlet UILabel *lufthouseTitle;
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *waiting;
 
 
 @end

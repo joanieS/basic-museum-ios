@@ -16,17 +16,17 @@
 @property (nonatomic, strong) NSMutableArray *beaconContentType;
 @property (nonatomic, strong) NSMutableArray *beaconAudio;
 
-
+/* Create a tour with all relevant data */
 -(LufthouseTour *)initTourWithName: (NSString *) tourName beaconIDArray: (NSMutableArray *) beaconIDs beaconContentArray: (NSMutableArray *) beaconContent beaconContentTypeArray:(NSMutableArray *) beaconContentTyoe beaconAudioArray: (NSMutableArray *) beaconAudio;
+
+/* Get aspects of the tour */
 -(NSString *)getTourName;
 -(NSString *)getBeaconIDAtIndex: (NSInteger) index;
 -(NSString *)getBeaconContentAtIndex: (NSInteger) index;
 -(NSString *)getBeaconContentTypeAtIndex: (NSInteger) index;
 -(NSString *)getBeaconAudioAtIndex: (NSInteger) index;
--(void)addBeaconID: (NSString *) newID addBeaconContent:(NSString *) newContent;
+
+/* Check if a beacon belongs to the tour and where it is in said tour */
 -(NSInteger)findIndexOfID: (NSString *) targetID;
--(NSInteger)findIndexOfContent: (NSString *) targetContent;
-
-
 
 @end

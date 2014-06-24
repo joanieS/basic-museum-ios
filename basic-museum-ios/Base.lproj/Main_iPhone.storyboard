@@ -34,6 +34,10 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES" address="YES"/>
                             </webView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="X1K-wt-sRc" userLabel="waiting">
+                                <rect key="frame" x="150" y="274" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -51,6 +55,7 @@
                         <outlet property="landingView" destination="Nmp-No-kji" id="NR6-Gk-yPF"/>
                         <outlet property="lufhouseLogo" destination="FfF-yt-kWM" id="TAS-xb-K6u"/>
                         <outlet property="lufthouseTitle" destination="yH7-Hq-dTc" id="zoZ-60-9ZQ"/>
+                        <outlet property="waiting" destination="X1K-wt-sRc" id="qb7-io-ioY"/>
                         <outlet property="webView" destination="Z5g-MF-lLy" id="2Aq-7t-XvW"/>
                     </connections>
                 </viewController>

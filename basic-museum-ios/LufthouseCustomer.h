@@ -14,14 +14,14 @@
 @property (nonatomic, strong) NSString *customerName;
 @property (nonatomic, strong) NSMutableArray *tours;
 
+/* Create the customer with tours */
 -(LufthouseCustomer *) initWithCustomerName: (NSString *) customerName customerTours: (NSMutableArray *) tours;
 
--(void) addTour: (LufthouseTour *) tour;
-
--(NSInteger) findTourName: (NSString *) targetName;
-
+/* Get the tours or a specific tour */
 -(NSMutableArray *) getTours;
-
 -(LufthouseTour *) getTourAtIndex: (NSInteger) index;
+
+/* Look for a tour and return its index */
+-(NSInteger) findTourName: (NSString *) targetName;
 
 @end
