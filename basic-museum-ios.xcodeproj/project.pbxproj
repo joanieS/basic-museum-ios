@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E131D391959D3FC005FA6D9 /* landingImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E131D381959D3FC005FA6D9 /* landingImage.png */; };
 		9B1DC1451940AEAB00D58A69 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B1DC1441940AEAB00D58A69 /* Foundation.framework */; };
 		9B1DC1471940AEAB00D58A69 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B1DC1461940AEAB00D58A69 /* CoreGraphics.framework */; };
 		9B1DC1491940AEAB00D58A69 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B1DC1481940AEAB00D58A69 /* UIKit.framework */; };
@@ -39,7 +40,7 @@
 		9BB549801954949C00EBA968 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BB5497E1954949C00EBA968 /* icon.png */; };
 		9BB549811954949C00EBA968 /* retinaIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BB5497F1954949C00EBA968 /* retinaIcon.png */; };
 		9BB549831954981E00EBA968 /* spotlightIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BB549821954981E00EBA968 /* spotlightIcon.png */; };
-		9BB549851954AEF400EBA968 /* landingImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BB549841954AEF400EBA968 /* landingImage.png */; };
+		9BB549851954AEF400EBA968 /* brownsLandingImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BB549841954AEF400EBA968 /* brownsLandingImage.png */; };
 		9BB549871954B11800EBA968 /* SongTitle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9BB549861954B11800EBA968 /* SongTitle.mp3 */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E131D381959D3FC005FA6D9 /* landingImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = landingImage.png; sourceTree = "<group>"; };
 		9B1DC1411940AEAB00D58A69 /* basic-museum-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "basic-museum-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B1DC1441940AEAB00D58A69 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9B1DC1461940AEAB00D58A69 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -98,7 +100,7 @@
 		9BB5497E1954949C00EBA968 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		9BB5497F1954949C00EBA968 /* retinaIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = retinaIcon.png; sourceTree = "<group>"; };
 		9BB549821954981E00EBA968 /* spotlightIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spotlightIcon.png; sourceTree = "<group>"; };
-		9BB549841954AEF400EBA968 /* landingImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = landingImage.png; sourceTree = "<group>"; };
+		9BB549841954AEF400EBA968 /* brownsLandingImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brownsLandingImage.png; sourceTree = "<group>"; };
 		9BB549861954B11800EBA968 /* SongTitle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SongTitle.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -223,7 +225,8 @@
 			isa = PBXGroup;
 			children = (
 				9B8795691958F176000ACA97 /* ManalAlSharif_2013G-480p.mp4 */,
-				9BB549841954AEF400EBA968 /* landingImage.png */,
+				9BB549841954AEF400EBA968 /* brownsLandingImage.png */,
+				0E131D381959D3FC005FA6D9 /* landingImage.png */,
 				9B8795671958C52D000ACA97 /* testImage.jpg */,
 				9BB5497E1954949C00EBA968 /* icon.png */,
 				9BB549821954981E00EBA968 /* spotlightIcon.png */,
@@ -344,11 +347,12 @@
 				9B1DC1601940AEAB00D58A69 /* Images.xcassets in Resources */,
 				9B1DC1581940AEAB00D58A69 /* Main_iPhone.storyboard in Resources */,
 				9B8795681958C52D000ACA97 /* testImage.jpg in Resources */,
-				9BB549851954AEF400EBA968 /* landingImage.png in Resources */,
+				9BB549851954AEF400EBA968 /* brownsLandingImage.png in Resources */,
 				9B1DC14F1940AEAB00D58A69 /* InfoPlist.strings in Resources */,
 				9BB549831954981E00EBA968 /* spotlightIcon.png in Resources */,
 				9BB549811954949C00EBA968 /* retinaIcon.png in Resources */,
 				9BB54975195473A300EBA968 /* app_logo.jpg in Resources */,
+				0E131D391959D3FC005FA6D9 /* landingImage.png in Resources */,
 				9B87956A1958F176000ACA97 /* ManalAlSharif_2013G-480p.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

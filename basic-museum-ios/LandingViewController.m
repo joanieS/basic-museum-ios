@@ -141,7 +141,7 @@
                         [beaconAssignment[1] addObject:[currentTour getBeaconContentAtIndex:beaconIndex]];
                         [beaconAssignment[2] addObject:[currentTour getBeaconContentTypeAtIndex:beaconIndex]];
                         [beaconAssignment[3] addObject:[currentTour getBeaconAudioAtIndex:beaconIndex]];
-                        NSLog(@"%s", "Beacon matched!");
+                        NSLog(@"Beacon matched! %@", [currentBeacon minor]);
                     }
                 }
             }
@@ -189,7 +189,7 @@
     NSString *url;
     NSURLRequest *beaconRequest = nil;
     for(int i = 0; i < [beaconArray[0] count]; i++) {
-        if(([checkBeacon proximity] == CLProximityNear  || [checkBeacon proximity] == CLProximityImmediate) && ![checkBeacon.minor isEqual:self.activeMinor] && [checkBeacon.minor isEqual:[[[beaconArray objectAtIndex:0] objectAtIndex:i] minor]]) {
+        if(([checkBeacon proximity] == CLProximityImmediate) && ![checkBeacon.minor isEqual:self.activeMinor] && [checkBeacon.minor isEqual:[[[beaconArray objectAtIndex:0] objectAtIndex:i] minor]]) {
             self.activeMinor = [[[beaconArray objectAtIndex:0] objectAtIndex:i] minor];
             if(!([beaconArray[2][i] rangeOfString:@"image"].location == NSNotFound)) {
                 beaconURL = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], beaconArray[1][i]]];
