@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E919E68195A283300D92571 /* spangler-03.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E919E67195A283300D92571 /* spangler-03.png */; };
+		0E919E6A195A289000D92571 /* spangler-05.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E919E69195A289000D92571 /* spangler-05.png */; };
+		0E919E6C195A28E100D92571 /* spangler-08.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E919E6B195A28E100D92571 /* spangler-08.png */; };
+		0E919E6E195A292800D92571 /* spangler-09.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E919E6D195A292800D92571 /* spangler-09.png */; };
 		9B1DC1451940AEAB00D58A69 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B1DC1441940AEAB00D58A69 /* Foundation.framework */; };
 		9B1DC1471940AEAB00D58A69 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B1DC1461940AEAB00D58A69 /* CoreGraphics.framework */; };
 		9B1DC1491940AEAB00D58A69 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B1DC1481940AEAB00D58A69 /* UIKit.framework */; };
@@ -57,6 +61,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E919E67195A283300D92571 /* spangler-03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spangler-03.png"; sourceTree = "<group>"; };
+		0E919E69195A289000D92571 /* spangler-05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spangler-05.png"; sourceTree = "<group>"; };
+		0E919E6B195A28E100D92571 /* spangler-08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spangler-08.png"; sourceTree = "<group>"; };
+		0E919E6D195A292800D92571 /* spangler-09.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spangler-09.png"; sourceTree = "<group>"; };
 		9B1DC1411940AEAB00D58A69 /* Lufthouse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lufthouse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B1DC1441940AEAB00D58A69 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9B1DC1461940AEAB00D58A69 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -239,6 +247,10 @@
 				9BB54974195473A300EBA968 /* app_logo.jpg */,
 				9B46E161194B643E0041D9A6 /* Lufthouse.JSON */,
 				9B87956B1959BC17000ACA97 /* README.md */,
+				0E919E69195A289000D92571 /* spangler-05.png */,
+				0E919E67195A283300D92571 /* spangler-03.png */,
+				0E919E6B195A28E100D92571 /* spangler-08.png */,
+				0E919E6D195A292800D92571 /* spangler-09.png */,
 				9BB549861954B11800EBA968 /* SongTitle.mp3 */,
 				9B9EFA8D19424BCB00F27337 /* lufthouselogo.png */,
 			);
@@ -352,13 +364,17 @@
 				9B1DC15B1940AEAB00D58A69 /* Main_iPad.storyboard in Resources */,
 				9BB549871954B11800EBA968 /* SongTitle.mp3 in Resources */,
 				9B1DC1601940AEAB00D58A69 /* Images.xcassets in Resources */,
+				0E919E6A195A289000D92571 /* spangler-05.png in Resources */,
 				9B8795741959CA44000ACA97 /* landingR4iPhone.png in Resources */,
 				9B1DC1581940AEAB00D58A69 /* Main_iPhone.storyboard in Resources */,
 				9B8795681958C52D000ACA97 /* testImage.jpg in Resources */,
+				0E919E6C195A28E100D92571 /* spangler-08.png in Resources */,
 				9BB549851954AEF400EBA968 /* landingImage.png in Resources */,
 				9B1DC14F1940AEAB00D58A69 /* InfoPlist.strings in Resources */,
+				0E919E6E195A292800D92571 /* spangler-09.png in Resources */,
 				9BB549831954981E00EBA968 /* spotlightIcon.png in Resources */,
 				9BB549811954949C00EBA968 /* retinaIcon.png in Resources */,
+				0E919E68195A283300D92571 /* spangler-03.png in Resources */,
 				9B87956C1959BC17000ACA97 /* README.md in Resources */,
 				9BB54975195473A300EBA968 /* app_logo.jpg in Resources */,
 				9B87956A1958F176000ACA97 /* ManalAlSharif_2013G-480p.mp4 in Resources */,
