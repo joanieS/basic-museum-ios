@@ -35,6 +35,8 @@
 //Allows the orientation to rotate if YES
 @property (nonatomic) BOOL                      shouldRotate;
 
+@property (nonatomic) BOOL                      testBool;
+
 @end
 
 
@@ -55,10 +57,11 @@
     // Turn rotation off and affirm we have not hit the landing screen yet
     self.shouldRotate = NO;
     self.hasLanded = false;
+    self.testBool = true;
     
     //Setup webView and go to the landingImage
     //@TODO: Get the first load out of viewDidLoad
-    self.webView.delegate = self;
+//    self.webView.delegate = self;
     NSURL *beaconURL = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], @"landingImage.png"]];
     NSURLRequest *beaconRequest = [NSURLRequest requestWithURL:beaconURL];
     [self.webView loadRequest:beaconRequest];
@@ -215,7 +218,7 @@
     //For each beacon we ranged and matched
     for(int i = 0; i < [beaconArray[0] count]; i++) {
         //If our proximity is immediate, the beacon isn't currently on display, and the beacon is the closest
-        if(([checkBeacon proximity] == CLProximityImmediate) && ![checkBeacon.minor isEqual:self.activeMinor] && [checkBeacon.minor isEqual:[[[beaconArray objectAtIndex:0] objectAtIndex:i] minor]]) {
+        if((self.testBool || [checkBeacon proximity] == CLProximityImmediate) && ![checkBeacon.minor isEqual:self.activeMinor] && [checkBeacon.minor isEqual:[[[beaconArray objectAtIndex:0] objectAtIndex:i] minor]]) {
             //Set the active beacon being displayed
             self.activeMinor = [[[beaconArray objectAtIndex:0] objectAtIndex:i] minor];
 
@@ -240,6 +243,11 @@
                 beaconURL = [NSURL URLWithString:beaconArray[1][i]];
                 beaconRequest = [NSURLRequest requestWithURL:beaconURL];
                 [self.webView loadRequest:beaconRequest];
+            }
+            else if(!([beaconArray[2][i] rangeOfString:@"photo-gallery"].location == NSNotFound)) {
+                NSLog(@"Gallery seen");
+//                [self performSegueWithIdentifier:@"segueToGallery" sender:self];
+                [self createPhotoGallery];
             }
             
             //If there is no audio to play, then send no audio
@@ -300,6 +308,15 @@
         }
     }
 }
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
+    return self.photos.count;
+}
+
+- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+    if (index < self.photos.count)
+        return [self.photos objectAtIndex:index];
+    return nil;
+}
 
 /* playVideoWithId
  * Given a videoId from YouTube, play an embedded version of the video
@@ -340,6 +357,31 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [self.waiting stopAnimating];
     self.waiting.hidden = TRUE;
+}
+
+- (void)createPhotoGallery {
+    self.photos = [NSMutableArray array];
+    [self.photos addObject:[MWPhoto photoWithURL:[NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], @"testImage.jpg"]]]];
+    [self.photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm4.static.flickr.com/3590/3329114220_5fbc5bc92b.jpg"]]];
+    
+    // Create browser (must be done each time photo browser is
+    // displayed. Photo browser objects cannot be re-used)
+    MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+    
+    // Set options
+    browser.displayActionButton = NO; // Show action button to allow sharing, copying, etc (defaults to YES)
+    browser.displayNavArrows = NO; // Whether to display left and right nav arrows on toolbar (defaults to NO)
+    browser.displaySelectionButtons = NO; // Whether selection buttons are shown on each image (defaults to NO)
+    browser.zoomPhotosToFill = YES; // Images that almost fill the screen will be initially zoomed to fill (defaults to YES)
+    browser.alwaysShowControls = NO; // Allows to control whether the bars and controls are always visible or whether they fade away to show the photo full (defaults to NO)
+    browser.enableGrid = NO; // Whether to allow the viewing of all the photo thumbnails on a grid (defaults to YES)
+    browser.startOnGrid = NO; // Whether to start on the grid of thumbnails instead of the first photo (defaults to NO)
+    
+    // Optionally set the current visible photo before displaying
+    [browser setCurrentPhotoIndex:0];
+    
+    // Present
+    [self.navigationController pushViewController:browser animated:YES];
 }
 
 //- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

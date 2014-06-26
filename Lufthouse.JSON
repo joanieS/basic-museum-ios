@@ -6,7 +6,7 @@
             "62443" : ["http://1307euclidcontent.wordpress.com/demo65535/", "web", "nil"],
             "47919" : ["sCJgcl_KN1Y", "web-video", "nil"],
             "4642"  : ["ManalAlSharif_2013G-480p.mp4", "local-video", "nil"],
-            "42298" : ["https://www.facebook.com/permalink.php?story_fbid=721143541260554&id=429763920398519", "web", "nil"]
+            "42298" : ["test", "photo-gallery", "nil"]
         }
     }
 }

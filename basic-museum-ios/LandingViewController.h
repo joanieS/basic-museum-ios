@@ -23,8 +23,14 @@
 #import "LufthouseCustomer.h"
 #import "LufthouseTour.h"
 
+#import "MWPhotoBrowser.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
-@interface LandingViewController : UIViewController
+
+@interface LandingViewController : UIViewController <MWPhotoBrowserDelegate>
+
+@property (nonatomic, strong) NSMutableArray *photos;
+@property (nonatomic, strong) NSMutableArray *thumbs;
 
 
 @property (strong, nonatomic) IBOutlet UIView *landingView;
