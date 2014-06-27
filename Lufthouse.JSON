@@ -2,11 +2,15 @@
     "Customer": {
         "demo": {
             "35084" : ["testImage.jpg", "image", "SongTitle.mp3"],
-            "47394" : ["rVeMiVU77wo", "web-video", "nil"],
+            "42298" : ["rVeMiVU77wo", "web-video", "nil"],
             "62443" : ["http://1307euclidcontent.wordpress.com/demo65535/", "web", "nil"],
             "47919" : ["sCJgcl_KN1Y", "web-video", "nil"],
             "4642"  : ["ManalAlSharif_2013G-480p.mp4", "local-video", "nil"],
-            "42298" : ["test", "photo-gallery", "nil"]
+            "47394" : [["http://farm4.static.flickr.com/3629/3339128908_7aecabc34b.jpg", "Test 1",
+                        "https://1307euclidcontent.files.wordpress.com/2014/06/occupy-cover.png", "nil",
+                        "http://img2.wikia.nocookie.net/__cb20131111211836/godfather/images/d/df/Cleveland.jpg", "Test after none",
+                        "testImage.jpg", "Last test"],
+                       "photo-gallery", "nil"]
         }
     }
 }

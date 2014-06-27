@@ -90,3 +90,9 @@ The following content types are availble in the app:
 
     "beacon-id" : ["yourMovie.mp4", "local-video", "nil"]
 
+"photo-gallery" - Swipeable gallery of local and online images with available captions. Structure as such:
+
+    "beacon-id" : [["http://www.yourURLHere.com", "caption string here or nil if none",
+                    "yourLocalFileName.extension", "nil",
+                    "anotherFile.jpg", "caption"],
+                    "photo-gallery", "yourAudioOrNil.mp3"]

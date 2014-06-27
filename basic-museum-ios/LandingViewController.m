@@ -35,6 +35,7 @@
 //Allows the orientation to rotate if YES
 @property (nonatomic) BOOL                      shouldRotate;
 
+//For testing on devices where you want to grab a beacon no matter the proximity
 @property (nonatomic) BOOL                      testBool;
 
 @end
@@ -56,12 +57,13 @@
     
     // Turn rotation off and affirm we have not hit the landing screen yet
     self.shouldRotate = NO;
-    self.hasLanded = false;
-    self.testBool = true;
+    self.hasLanded = true;
+    //Turn off if CLProximityImmediate only
+    self.testBool = false;
     
     //Setup webView and go to the landingImage
     //@TODO: Get the first load out of viewDidLoad
-//    self.webView.delegate = self;
+
     NSURL *beaconURL = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], @"landingImage.png"]];
     NSURLRequest *beaconRequest = [NSURLRequest requestWithURL:beaconURL];
     [self.webView loadRequest:beaconRequest];
@@ -78,6 +80,16 @@
     } @catch (NSException *exception) {
         NSLog(@"%@", exception.reason);
     }
+}
+
+/* viewDidAppear
+ * Upon exiting another view controller, reset landing to no rotation and no 
+ * active minor
+ */
+-(void)viewDidAppear:(BOOL)animated
+{
+    self.shouldRotate = NO;
+    self.activeMinor = 0000;
 }
 
 /* loadBeaconData
@@ -214,6 +226,7 @@
     NSURL *beaconURL;
     NSString *url;
     NSURLRequest *beaconRequest = nil;
+    NSMutableArray *photoArray;
     
     //For each beacon we ranged and matched
     for(int i = 0; i < [beaconArray[0] count]; i++) {
@@ -244,17 +257,39 @@
                 beaconRequest = [NSURLRequest requestWithURL:beaconURL];
                 [self.webView loadRequest:beaconRequest];
             }
+            //If the content is a photo gallery
             else if(!([beaconArray[2][i] rangeOfString:@"photo-gallery"].location == NSNotFound)) {
-                NSLog(@"Gallery seen");
-//                [self performSegueWithIdentifier:@"segueToGallery" sender:self];
-                [self createPhotoGallery];
+                //Clear any residue
+                photoArray = [NSMutableArray array];
+                
+                //For each image in the gallery
+                for(int j = 0; j < [beaconArray[1][i] count]; j = j + 2) {
+                    //If it's local, create a local URL
+                    if ([beaconArray[1][i][j] rangeOfString:@"http"].location == NSNotFound && [beaconArray[1][i][j] rangeOfString:@"www."].location == NSNotFound) {
+                        [photoArray addObject:[MWPhoto photoWithURL:[NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], beaconArray[1][i][j]]]]];
+                        //If there is a caption, add it
+                        if (![beaconArray[1][i][j + 1] isEqualToString:@"nil"]) {
+                            [[photoArray lastObject] addCaption:beaconArray[1][i][j + 1]];
+                        }
+                    }
+                    //If it's online, create a web url
+                    else {
+                        [photoArray addObject:[MWPhoto photoWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", beaconArray[1][i][j]]]]];
+                        //If there is a caption, add it
+                        if (![beaconArray[1][i][j + 1] isEqualToString:@"nil"]) {
+                            [[photoArray lastObject] addCaption:beaconArray[1][i][j + 1]];
+                        }
+                    }
+                }
+                //Create the photo gallery and display it
+                [self createPhotoGallery:photoArray];
             }
             
             //If there is no audio to play, then send no audio
             if ([[[beaconArray objectAtIndex:2] objectAtIndex:i] isEqualToString:@"nil"]) {
                 url = nil;
             }
-            else {
+            else { //Otherwise, play that funky music, white boy
                 url = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], [[beaconArray objectAtIndex:2] objectAtIndex:i]];
             }
             
@@ -359,10 +394,10 @@
     self.waiting.hidden = TRUE;
 }
 
-- (void)createPhotoGallery {
-    self.photos = [NSMutableArray array];
-    [self.photos addObject:[MWPhoto photoWithURL:[NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], @"testImage.jpg"]]]];
-    [self.photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm4.static.flickr.com/3590/3329114220_5fbc5bc92b.jpg"]]];
+- (void)createPhotoGallery: (NSMutableArray *) photoArray
+{
+    //Gallery accesses photos through self.photos, so add our array to that
+    self.photos = photoArray;
     
     // Create browser (must be done each time photo browser is
     // displayed. Photo browser objects cannot be re-used)
