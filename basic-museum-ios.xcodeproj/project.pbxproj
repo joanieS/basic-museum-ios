@@ -27,6 +27,7 @@
 		9B8795681958C52D000ACA97 /* testImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9B8795671958C52D000ACA97 /* testImage.jpg */; };
 		9B8795731959CA44000ACA97 /* landing2xiPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B8795711959CA44000ACA97 /* landing2xiPhone.png */; };
 		9B8795741959CA44000ACA97 /* landingR4iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B8795721959CA44000ACA97 /* landingR4iPhone.png */; };
+		9B917DA4195DF7ED00CC7A83 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B1DC1561940AEAB00D58A69 /* Main_iPhone.storyboard */; };
 		9B9EFA7B1941FEF100F27337 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9EFA7A1941FEF100F27337 /* CoreBluetooth.framework */; };
 		9B9EFA7D1941FEFE00F27337 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9EFA7C1941FEFE00F27337 /* CoreLocation.framework */; };
 		9B9EFA861941FF3000F27337 /* libEstimoteSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9EFA851941FF3000F27337 /* libEstimoteSDK.a */; };
@@ -636,6 +637,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B917DA4195DF7ED00CC7A83 /* Main_iPhone.storyboard in Resources */,
 				9BC27C2A195DBEDF00438AF0 /* MWPhotoBrowser.bundle in Resources */,
 				9B8795731959CA44000ACA97 /* landing2xiPhone.png in Resources */,
 				9B46E164194B723C0041D9A6 /* Lufthouse.JSON in Resources */,
