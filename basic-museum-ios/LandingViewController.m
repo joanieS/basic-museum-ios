@@ -58,7 +58,7 @@
     // Turn rotation off and affirm we have not hit the landing screen yet
     self.shouldRotate = NO;
     self.hasLanded = true;
-    //Turn off if CLProximityImmediate only
+    //Turn off if CLProximityImmediate only  or if using a Mac Book app
     self.testBool = false;
     
     //Setup webView and go to the landingImage
@@ -239,6 +239,19 @@
 =======
         //If our proximity is immediate, the beacon isn't currently on display, and the beacon is the closest
         if((self.testBool || [checkBeacon proximity] == CLProximityImmediate) && ![checkBeacon.minor isEqual:self.activeMinor] && [checkBeacon.minor isEqual:[[[beaconArray objectAtIndex:0] objectAtIndex:i] minor]]) {
+            
+            //If there is no audio to play, then send no audio
+            if ([[[beaconArray objectAtIndex:2] objectAtIndex:i] isEqualToString:@"nil"]) {
+                url = nil;
+            }
+            else { //Otherwise, play that funky music, white boy
+                url = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], [[beaconArray objectAtIndex:3] objectAtIndex:i]];
+            }
+            
+            //Transition into the next song with an audio fade
+            [self doVolumeFade:url];
+            
+            
             //Set the active beacon being displayed
 >>>>>>> master
             self.activeMinor = [[[beaconArray objectAtIndex:0] objectAtIndex:i] minor];
@@ -293,16 +306,6 @@
                 [self createPhotoGallery:photoArray];
             }
             
-            //If there is no audio to play, then send no audio
-            if ([[[beaconArray objectAtIndex:2] objectAtIndex:i] isEqualToString:@"nil"]) {
-                url = nil;
-            }
-            else { //Otherwise, play that funky music, white boy
-                url = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], [[beaconArray objectAtIndex:2] objectAtIndex:i]];
-            }
-            
-            //Transition into the next song with an audio fade
-            [self doVolumeFade:url];
             
             //Assert we are not on the landing image and that we can rotate here
             self.hasLanded = false;

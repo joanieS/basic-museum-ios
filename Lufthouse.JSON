@@ -1,6 +1,10 @@
 {
     "Customer": {
         "demo": {
+            "47394" : [["brownstour-03.png", "nil",
+                        "brownstour-04.png", "Chamoionship Program Cover",
+                        "brownstour-05.png", "nil"],
+                       "photo-gallery", "nil"],
             "35084" : ["testImage.jpg", "image", "SongTitle.mp3"],
 <<<<<<< HEAD
             "47394" : ["rVeMiVU77wo", "web-video", "nil"],
@@ -12,6 +16,7 @@
             "42298" : ["rVeMiVU77wo", "web-video", "nil"],
             "62443" : ["http://1307euclidcontent.wordpress.com/demo65535/", "web", "nil"],
             "47919" : ["sCJgcl_KN1Y", "web-video", "nil"],
+<<<<<<< HEAD
             "4642"  : ["ManalAlSharif_2013G-480p.mp4", "local-video", "nil"],
             "47394" : [["http://farm4.static.flickr.com/3629/3339128908_7aecabc34b.jpg", "Test 1",
                         "https://1307euclidcontent.files.wordpress.com/2014/06/occupy-cover.png", "nil",
@@ -19,6 +24,11 @@
                         "testImage.jpg", "Last test"],
                        "photo-gallery", "nil"]
 >>>>>>> master
+=======
+            "4642"  : [["brownstour-06.png", "nil",
+                        "brownstour-07.png", "nil"],
+                       "photo-gallery", "Browns-Audio-1.mp3"]
+>>>>>>> develop
         }
     }
 }
