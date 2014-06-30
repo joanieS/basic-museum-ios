@@ -59,7 +59,7 @@
     self.shouldRotate = NO;
     self.hasLanded = true;
     //Turn off if CLProximityImmediate only  or if using a Mac Book app
-    self.testBool = false;
+    self.testBool = true;
     
     //Setup webView and go to the landingImage
     //@TODO: Get the first load out of viewDidLoad
@@ -67,6 +67,13 @@
     NSURL *beaconURL = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], @"landingImage.png"]];
     NSURLRequest *beaconRequest = [NSURLRequest requestWithURL:beaconURL];
     [self.webView loadRequest:beaconRequest];
+    
+    
+    //Add observer to tell when youtube player is playing
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(playbackStateDidChange:)
+                                                 name:@"MPAVControllerPlaybackStateChangedNotification"
+                                               object:nil];
     
     // Setup beacon manager as this controller
     self.beaconManager = [[ESTBeaconManager alloc] init];
@@ -301,7 +308,8 @@
             
             //Assert we are not on the landing image and that we can rotate here
             self.hasLanded = false;
-            self.shouldRotate = YES;
+            if ([beaconArray[2][i] rangeOfString:@"web-video"].location == NSNotFound)
+                self.shouldRotate = YES;
         }
     }
     //If there are no beacons to display, go to the landing image
@@ -367,6 +375,14 @@
     
     //Load, baby, load!
     [self.webView loadHTMLString:html baseURL:[[NSBundle mainBundle] resourceURL]];
+}
+
+/* playbackStateDidChange
+ * When the player starts, allow rotation
+ */
+- (void)playbackStateDidChange:(NSNotification *)note
+{
+    self.shouldRotate = YES;
 }
 
 /* shouldAutorotate
