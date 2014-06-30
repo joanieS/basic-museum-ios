@@ -1,17 +1,31 @@
 {
+    
     "Customer": {
+        
         "demo": {
+            
             "47394" : [["brownstour-03.png", "nil",
-                        "brownstour-04.png", "Chamoionship Program Cover",
+                        
+                        "brownstour-04.png", "Championship Program Cover",
+                        
                         "brownstour-05.png", "nil"],
+                       
                        "photo-gallery", "nil"],
-            "35084" : ["testImage.jpg", "image", "SongTitle.mp3"],
-            "42298" : ["rVeMiVU77wo", "web-video", "nil"],
-            "62443" : ["http://1307euclidcontent.wordpress.com/demo65535/", "web", "nil"],
-            "47919" : ["sCJgcl_KN1Y", "web-video", "nil"],
+            
             "4642"  : [["brownstour-06.png", "nil",
+                        
                         "brownstour-07.png", "nil"],
-                       "photo-gallery", "Browns-Audio-1.mp3"]
+                       
+                       "photo-gallery", "Browns-Audio-1.mp3"],
+            
+            "47919" : ["1r_xDVAHYwU", "web-video", "nil"],
+            
+            "42298" : ["1r_xDVAHYwU", "web-video", "nil"],
+            
+            "62443" : ["http://1307euclidcontent.wordpress.com/demo65535/", "web", "nil"]
+            
         }
+        
     }
+    
 }
