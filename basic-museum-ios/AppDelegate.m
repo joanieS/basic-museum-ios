@@ -7,15 +7,32 @@
 //
 
 #import "AppDelegate.h"
+#import "GalleryViewController.h"
+#import "LandingViewController.h"
 
 @implementation AppDelegate
 
+@synthesize window = _window;
+@synthesize viewController = _viewController;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+//    GalleryViewController *gallery = [[GalleryViewController alloc] initWithStyle:UITableViewStylePlain];
+//    LandingViewController *landing = [[LandingViewController alloc] init];
+//    self.viewController = (UIViewController *)[[UINavigationController alloc] initWithRootViewController:landing];
+//    self.window.rootViewController = self.viewController;
+//    [self.window makeKeyAndVisible];
     return YES;
 }
-							
+//
+//- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+//{
+//    // Override point for customization after application launch.
+//    return YES;
+//}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
