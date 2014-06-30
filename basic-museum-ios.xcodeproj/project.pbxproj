@@ -7,11 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-<<<<<<< HEAD
-		0E131D391959D3FC005FA6D9 /* landingImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E131D381959D3FC005FA6D9 /* landingImage.png */; };
-=======
 		81A64197B6664BB085F9E31D /* libPods-basic-museum-iosTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28CF96DC398949598B10C94A /* libPods-basic-museum-iosTests.a */; };
->>>>>>> master
 		9B1DC1451940AEAB00D58A69 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B1DC1441940AEAB00D58A69 /* Foundation.framework */; };
 		9B1DC1471940AEAB00D58A69 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B1DC1461940AEAB00D58A69 /* CoreGraphics.framework */; };
 		9B1DC1491940AEAB00D58A69 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B1DC1481940AEAB00D58A69 /* UIKit.framework */; };
@@ -44,7 +40,7 @@
 		9BB549801954949C00EBA968 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BB5497E1954949C00EBA968 /* icon.png */; };
 		9BB549811954949C00EBA968 /* retinaIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BB5497F1954949C00EBA968 /* retinaIcon.png */; };
 		9BB549831954981E00EBA968 /* spotlightIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BB549821954981E00EBA968 /* spotlightIcon.png */; };
-		9BB549851954AEF400EBA968 /* brownsLandingImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BB549841954AEF400EBA968 /* brownsLandingImage.png */; };
+		9BB549851954AEF400EBA968 /* landingImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BB549841954AEF400EBA968 /* landingImage.png */; };
 		9BB549871954B11800EBA968 /* SongTitle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9BB549861954B11800EBA968 /* SongTitle.mp3 */; };
 		9BC27965195C9DDD00438AF0 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BC27964195C9DDD00438AF0 /* AssetsLibrary.framework */; };
 		9BC27B12195DB8F100438AF0 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC27B11195DB8F100438AF0 /* NavigationController.m */; };
@@ -104,14 +100,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-<<<<<<< HEAD
-		0E131D381959D3FC005FA6D9 /* landingImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = landingImage.png; sourceTree = "<group>"; };
-		9B1DC1411940AEAB00D58A69 /* basic-museum-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "basic-museum-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-=======
 		28CF96DC398949598B10C94A /* libPods-basic-museum-iosTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-basic-museum-iosTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		32EE58DD597F467582E773D2 /* libPods-basic-museum-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-basic-museum-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B1DC1411940AEAB00D58A69 /* Lufthouse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lufthouse.app; sourceTree = BUILT_PRODUCTS_DIR; };
->>>>>>> master
 		9B1DC1441940AEAB00D58A69 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9B1DC1461940AEAB00D58A69 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		9B1DC1481940AEAB00D58A69 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -157,7 +148,7 @@
 		9BB5497E1954949C00EBA968 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		9BB5497F1954949C00EBA968 /* retinaIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = retinaIcon.png; sourceTree = "<group>"; };
 		9BB549821954981E00EBA968 /* spotlightIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spotlightIcon.png; sourceTree = "<group>"; };
-		9BB549841954AEF400EBA968 /* brownsLandingImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brownsLandingImage.png; sourceTree = "<group>"; };
+		9BB549841954AEF400EBA968 /* landingImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = landingImage.png; sourceTree = "<group>"; };
 		9BB549861954B11800EBA968 /* SongTitle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SongTitle.mp3; sourceTree = "<group>"; };
 		9BC27964195C9DDD00438AF0 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		9BC27B10195DB8F100438AF0 /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
@@ -380,14 +371,8 @@
 		9B46E163194B70E90041D9A6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
-				9B8795691958F176000ACA97 /* ManalAlSharif_2013G-480p.mp4 */,
-				9BB549841954AEF400EBA968 /* brownsLandingImage.png */,
-				0E131D381959D3FC005FA6D9 /* landingImage.png */,
-=======
 				9B8795711959CA44000ACA97 /* landing2xiPhone.png */,
 				9B8795721959CA44000ACA97 /* landingR4iPhone.png */,
->>>>>>> master
 				9B8795671958C52D000ACA97 /* testImage.jpg */,
 				9BB5497E1954949C00EBA968 /* icon.png */,
 				9BB549841954AEF400EBA968 /* landingImage.png */,
@@ -665,12 +650,8 @@
 				9B1DC1601940AEAB00D58A69 /* Images.xcassets in Resources */,
 				9B8795741959CA44000ACA97 /* landingR4iPhone.png in Resources */,
 				9B8795681958C52D000ACA97 /* testImage.jpg in Resources */,
-<<<<<<< HEAD
-				9BB549851954AEF400EBA968 /* brownsLandingImage.png in Resources */,
-=======
 				9BC27C0B195DBEDF00438AF0 /* README.mdown in Resources */,
 				9BB549851954AEF400EBA968 /* landingImage.png in Resources */,
->>>>>>> master
 				9B1DC14F1940AEAB00D58A69 /* InfoPlist.strings in Resources */,
 				9BB549831954981E00EBA968 /* spotlightIcon.png in Resources */,
 				9BCCE75D1961B1C500939C96 /* Browns-Audio-1.mp3 in Resources */,
@@ -678,11 +659,6 @@
 				9BC27C1A195DBEDF00438AF0 /* README.md in Resources */,
 				9BB549811954949C00EBA968 /* retinaIcon.png in Resources */,
 				9BB54975195473A300EBA968 /* app_logo.jpg in Resources */,
-<<<<<<< HEAD
-				0E131D391959D3FC005FA6D9 /* landingImage.png in Resources */,
-				9B87956A1958F176000ACA97 /* ManalAlSharif_2013G-480p.mp4 in Resources */,
-=======
->>>>>>> master
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
