@@ -86,6 +86,7 @@
 		9BC27C28195DBEDF00438AF0 /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC27BFC195DBEDF00438AF0 /* UIImage+WebP.m */; };
 		9BC27C29195DBEDF00438AF0 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC27BFE195DBEDF00438AF0 /* UIImageView+WebCache.m */; };
 		9BC27C2A195DBEDF00438AF0 /* MWPhotoBrowser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9BC27C00195DBEDF00438AF0 /* MWPhotoBrowser.bundle */; };
+		9BCCE75D1961B1C500939C96 /* Browns-Audio-1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9BCCE75C1961B1C500939C96 /* Browns-Audio-1.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -239,6 +240,7 @@
 		9BC27BFE195DBEDF00438AF0 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		9BC27BFF195DBEDF00438AF0 /* MWPhotoBrowser-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MWPhotoBrowser-Prefix.pch"; sourceTree = "<group>"; };
 		9BC27C00195DBEDF00438AF0 /* MWPhotoBrowser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MWPhotoBrowser.bundle; sourceTree = "<group>"; };
+		9BCCE75C1961B1C500939C96 /* Browns-Audio-1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Browns-Audio-1.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -378,6 +380,7 @@
 				9BB5497F1954949C00EBA968 /* retinaIcon.png */,
 				9BB54974195473A300EBA968 /* app_logo.jpg */,
 				9B46E161194B643E0041D9A6 /* Lufthouse.JSON */,
+				9BCCE75C1961B1C500939C96 /* Browns-Audio-1.mp3 */,
 				9B87956B1959BC17000ACA97 /* README.md */,
 				9BB549861954B11800EBA968 /* SongTitle.mp3 */,
 				9B9EFA8D19424BCB00F27337 /* lufthouselogo.png */,
@@ -651,6 +654,7 @@
 				9BB549851954AEF400EBA968 /* landingImage.png in Resources */,
 				9B1DC14F1940AEAB00D58A69 /* InfoPlist.strings in Resources */,
 				9BB549831954981E00EBA968 /* spotlightIcon.png in Resources */,
+				9BCCE75D1961B1C500939C96 /* Browns-Audio-1.mp3 in Resources */,
 				9BC27C19195DBEDF00438AF0 /* LICENSE in Resources */,
 				9BC27C1A195DBEDF00438AF0 /* README.md in Resources */,
 				9BB549811954949C00EBA968 /* retinaIcon.png in Resources */,
