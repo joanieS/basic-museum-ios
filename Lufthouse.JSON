@@ -11,19 +11,68 @@
                         "brownstour-05.png", "nil"],
                        
                        "photo-gallery", "nil"],
-            
             "4642"  : [["brownstour-06.png", "nil",
                         
                         "brownstour-07.png", "nil"],
                        
                        "photo-gallery", "Browns-Audio-1.mp3"],
             
-            "47919" : ["1r_xDVAHYwU", "web-video", "nil"],
+            "42298" : ["greatest_day.mp4", "local-video", "nil"],
             
-            "42298" : ["1r_xDVAHYwU", "web-video", "nil"],
+            "39720" : [["brownstour-11.png", "nil",
+                        
+                        "brownstour-12.png", "nil",
+                        
+                        "brownstour-13.png", "nil",
+                        
+                        "brownstour-14.png", "nil",
+                        
+                        "brownstour-15.png", "nil"],
+                       
+                       "photo-gallery", "nil"],
             
-            "62443" : ["http://1307euclidcontent.wordpress.com/demo65535/", "web", "nil"]
+            "65535" : [["brownstour-16.png", "nil",
+                        "brownstour-17a.png", "nil",
+                        "brownstour-18.png", "nil",
+                        "brownstour-19.png", "nil"],
+                       "photo-gallery", "nil"],
             
+            "62443" : ["brownstour-20.png", "image", "nil"],
+            
+            "47919" : [["brownstour-21.png", "nil",
+                        "brownstour-22.png", "nil",
+                        "brownstour-23.png", "nil",
+                        "brownstour-24.png", "nil"],
+                       "photo-gallery", "nil"],
+            
+            "29981" : [["brownstour-25.png", "nil",
+                       "brownstour-29.png", "nil",
+                       "brownstour-30.png", "nil",
+                       "brownstour-31.png", "nil"],
+                       "photo-gallery", "nil"],
+            
+            "35084" : [["brownstour-26.png", "nil",
+                        "brownstour-27.png", "nil",
+                        "brownstour-28.png", "nil"],
+                       "photo-gallery", "nil"],
+            
+            "19734" : [["brownstour-32.png", "nil",
+                        "brownstour-33.png", "nil",
+                        "brownstour-34.png", "nil",
+                        "brownstour-35.png", "nil"],
+                       "photo-gallery", "nil"],
+            
+            "5144" : [["brownstour-38.png", "nil",
+                        "brownstour-39.png", "nil",
+                        "brownstour-40.png", "nil"],
+                       "photo-gallery", "nil"],
+            
+            "x" : ["1r_xDVAHYwU", "web-video", "nil"],
+            
+            
+
+            
+    
         }
         
     }
