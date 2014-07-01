@@ -60,7 +60,7 @@
     self.shouldRotate = NO;
     self.hasLanded = true;
     //Turn off if CLProximityImmediate only  or if using a Mac Book app
-    self.testBool = true;
+    self.testBool = false;
     
     //Setup webView and go to the landingImage
     //@TODO: Get the first load out of viewDidLoad

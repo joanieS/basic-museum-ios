@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E7A078019632AC7004BB781 /* brownstour-24.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E7A077F19632AC7004BB781 /* brownstour-24.png */; };
-		0E7A078219632C6D004BB781 /* brownstour-38.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E7A078119632C6D004BB781 /* brownstour-38.png */; };
-		0E7A078419632C7F004BB781 /* brownstour-39.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E7A078319632C7F004BB781 /* brownstour-39.png */; };
+		0E7A078519634982004BB781 /* brownstour-24.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E7A077F19632AC7004BB781 /* brownstour-24.png */; };
+		0E7A0786196349A6004BB781 /* brownstour-38.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E7A078119632C6D004BB781 /* brownstour-38.png */; };
+		0E7A0787196349AF004BB781 /* brownstour-39.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E7A078319632C7F004BB781 /* brownstour-39.png */; };
 		0EEDC3281961C850005B3945 /* Lufthouse.JSON in Resources */ = {isa = PBXBuildFile; fileRef = 9B46E161194B643E0041D9A6 /* Lufthouse.JSON */; };
 		0EEDC32A1961CBDF005B3945 /* brownstour-11.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EEDC3291961CBDF005B3945 /* brownstour-11.png */; };
 		0EEDC32C1961CC28005B3945 /* brownstour-03.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EEDC32B1961CC28005B3945 /* brownstour-03.png */; };
@@ -757,6 +757,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E7A0787196349AF004BB781 /* brownstour-39.png in Resources */,
+				0E7A0786196349A6004BB781 /* brownstour-38.png in Resources */,
+				0E7A078519634982004BB781 /* brownstour-24.png in Resources */,
 				9B4ED75A1963030200A4D325 /* greatest_day.mp4 in Resources */,
 				0EEDC32A1961CBDF005B3945 /* brownstour-11.png in Resources */,
 				0EEDC3281961C850005B3945 /* Lufthouse.JSON in Resources */,
@@ -781,7 +784,6 @@
 				0EEDC3441961E149005B3945 /* brownstour-15.png in Resources */,
 				9B1DC1601940AEAB00D58A69 /* Images.xcassets in Resources */,
 				9B8795741959CA44000ACA97 /* landingR4iPhone.png in Resources */,
-				0E7A078019632AC7004BB781 /* brownstour-24.png in Resources */,
 				9B4ED7531962FC5400A4D325 /* brownstour-34.png in Resources */,
 				9B4ED7481962FC5400A4D325 /* brownstour-22.png in Resources */,
 				9B4ED7591962FC5400A4D325 /* brownstour-40.png in Resources */,
@@ -797,7 +799,6 @@
 				0EEDC33E1961CCE0005B3945 /* brownstour-12.png in Resources */,
 				9B1DC14F1940AEAB00D58A69 /* InfoPlist.strings in Resources */,
 				9BB549831954981E00EBA968 /* spotlightIcon.png in Resources */,
-				0E7A078419632C7F004BB781 /* brownstour-39.png in Resources */,
 				0EEDC3481961E791005B3945 /* 1964team.jpg in Resources */,
 				9BCCE75D1961B1C500939C96 /* Browns-Audio-1.mp3 in Resources */,
 				9BC27C19195DBEDF00438AF0 /* LICENSE in Resources */,
@@ -809,7 +810,6 @@
 				0EEDC32E1961CC35005B3945 /* brownstour-04.png in Resources */,
 				9B4ED7501962FC5400A4D325 /* brownstour-31.png in Resources */,
 				9B4ED74B1962FC5400A4D325 /* brownstour-25.png in Resources */,
-				0E7A078219632C6D004BB781 /* brownstour-38.png in Resources */,
 				9B4ED74E1962FC5400A4D325 /* brownstour-28.png in Resources */,
 				9BB54975195473A300EBA968 /* app_logo.jpg in Resources */,
 				0EEDC3401961CCE0005B3945 /* brownstour-14.png in Resources */,
