@@ -240,7 +240,7 @@
     //For each beacon we ranged and matched
     for(int i = 0; i < [beaconArray[0] count]; i++) {
         //If our proximity is immediate, the beacon isn't currently on display, and the beacon is the closest
-        if((self.testBool || [checkBeacon proximity] == CLProximityImmediate) && !([checkBeacon.minor isEqual:self.activeMinor]) && [checkBeacon.minor isEqual:[[[beaconArray objectAtIndex:0] objectAtIndex:i] minor]]) {
+        if((self.testBool || [checkBeacon proximity] == CLProximityNear || [checkBeacon proximity] == CLProximityImmediate) && !([checkBeacon.minor isEqual:self.activeMinor]) && [checkBeacon.minor isEqual:[[[beaconArray objectAtIndex:0] objectAtIndex:i] minor]]) {
     
             
             //If there is no audio to play, then send no audio
