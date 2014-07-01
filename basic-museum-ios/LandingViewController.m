@@ -66,8 +66,10 @@
     //@TODO: Get the first load out of viewDidLoad
 
     NSURL *beaconURL = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], @"landingImage.png"]];
-    NSURLRequest *beaconRequest = [NSURLRequest requestWithURL:beaconURL];
-    [self.webView loadRequest:beaconRequest];
+    NSString *htmlString = @"<style media='screen' type='text/css'> IMG.displayed {display: block; margin-left: auto;    margin-right: auto; background-color: gray } </style><html><body><img class='displayed' src='%@' height='100%%' align='middle'></body></html>";
+    NSString *beaconHTML = [[NSString alloc] initWithFormat:htmlString,beaconURL];
+    self.webView.scalesPageToFit = YES;
+    [self.webView loadHTMLString:beaconHTML baseURL:nil];
     
     
     //Add observer to tell when youtube player is playing
@@ -233,7 +235,7 @@
     NSMutableArray *beaconArray = self.contentBeaconArray;
     //Variables for loading content in the UIWebView
     NSURL *beaconURL;
-    NSString *url;
+    NSString *url, *htmlString, *beaconHTML;
     NSURLRequest *beaconRequest = nil;
     NSMutableArray *photoArray;
     
@@ -260,8 +262,10 @@
                     [self.navigationController popViewControllerAnimated:YES];
                 }
                 beaconURL = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], beaconArray[1][i]]];
-                beaconRequest = [NSURLRequest requestWithURL:beaconURL];
-                [self.webView loadRequest:beaconRequest];
+                htmlString = @"<style media='screen' type='text/css'> IMG.displayed {display: block; margin-left: auto;    margin-right: auto; background-color: rgb(71,77,73) } </style><html><body><img class='displayed' src='%@' height='100%%' align='middle'></body></html>";
+                beaconHTML = [[NSString alloc] initWithFormat:htmlString,beaconURL];
+                self.webView.scalesPageToFit = YES;
+                [self.webView loadHTMLString:beaconHTML baseURL:nil];
             }
             //If the content is an online video, embed it and play
             else if(!([beaconArray[2][i] rangeOfString:@"web-video"].location == NSNotFound)) {
@@ -332,9 +336,12 @@
         }
         //Load the image, transition to no audio, set the landed option, reset the active beacon, and restrict rotation
 
+        
         beaconURL = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], @"landingImage.png"]];
-        NSURLRequest *beaconRequest = [NSURLRequest requestWithURL:beaconURL];
-        [self.webView loadRequest:beaconRequest];
+        htmlString = @"<style media='screen' type='text/css'> IMG.displayed {display: block; margin-left: auto;    margin-right: auto; background-color: rgb(71,77,73) } </style><html><body><img class='displayed' src='%@' height='100%%' align='middle'></body></html>";
+        beaconHTML = [[NSString alloc] initWithFormat:htmlString,beaconURL];
+        self.webView.scalesPageToFit = YES;
+        [self.webView loadHTMLString:beaconHTML baseURL:nil];
         [self doVolumeFade:nil];
         self.hasLanded = true;
         self.activeMinor = 0000;
