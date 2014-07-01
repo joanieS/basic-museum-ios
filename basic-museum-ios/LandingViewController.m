@@ -241,7 +241,7 @@
         if((self.testBool || [checkBeacon proximity] == CLProximityImmediate) && ![checkBeacon.minor isEqual:self.activeMinor] && [checkBeacon.minor isEqual:[[[beaconArray objectAtIndex:0] objectAtIndex:i] minor]]) {
             
             //If there is no audio to play, then send no audio
-            if ([[[beaconArray objectAtIndex:2] objectAtIndex:i] isEqualToString:@"nil"]) {
+            if ([[[beaconArray objectAtIndex:3] objectAtIndex:i] isEqualToString:@"nil"]) {
                 url = nil;
             }
             else { //Otherwise, play that funky music, white boy
@@ -308,7 +308,7 @@
             
             //Assert we are not on the landing image and that we can rotate here
             self.hasLanded = false;
-            if ([beaconArray[2][i] rangeOfString:@"web-video"].location == NSNotFound)
+            if ([beaconArray[2][i] rangeOfString:@"web-video"].location == NSNotFound && [beaconArray[2][i] rangeOfString:@"photo-gallery"].location == NSNotFound)
                 self.shouldRotate = YES;
         }
     }

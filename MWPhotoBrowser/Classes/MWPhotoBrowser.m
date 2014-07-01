@@ -19,6 +19,11 @@
 
 #pragma mark - Init
 
+- (BOOL)shouldAutorotate
+{
+    return NO;
+}
+
 - (id)init {
     if ((self = [super init])) {
         [self _initialisation];
@@ -74,7 +79,7 @@
     _enableGrid = YES;
     _startOnGrid = NO;
     _enableSwipeToDismiss = YES;
-    _delayToHideElements = 5;
+    _delayToHideElements = 1;
     _visiblePages = [[NSMutableSet alloc] init];
     _recycledPages = [[NSMutableSet alloc] init];
     _photos = [[NSMutableArray alloc] init];
