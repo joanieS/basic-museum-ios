@@ -37,6 +37,7 @@
 
 //For testing on devices where you want to grab a beacon no matter the proximity
 @property (nonatomic) BOOL                      testBool;
+@property (nonatomic) BOOL                      isLocalVideo;
 
 @end
 
@@ -59,7 +60,7 @@
     self.shouldRotate = NO;
     self.hasLanded = true;
     //Turn off if CLProximityImmediate only  or if using a Mac Book app
-    self.testBool = false;
+    self.testBool = true;
     
     //Setup webView and go to the landingImage
     //@TODO: Get the first load out of viewDidLoad
@@ -97,6 +98,7 @@
 {
     self.shouldRotate = NO;
     self.activeMinor = 0000;
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 /* loadBeaconData
@@ -238,7 +240,8 @@
     //For each beacon we ranged and matched
     for(int i = 0; i < [beaconArray[0] count]; i++) {
         //If our proximity is immediate, the beacon isn't currently on display, and the beacon is the closest
-        if((self.testBool || [checkBeacon proximity] == CLProximityImmediate) && ![checkBeacon.minor isEqual:self.activeMinor] && [checkBeacon.minor isEqual:[[[beaconArray objectAtIndex:0] objectAtIndex:i] minor]]) {
+        if((self.testBool || [checkBeacon proximity] == CLProximityImmediate) && !([checkBeacon.minor isEqual:self.activeMinor]) && [checkBeacon.minor isEqual:[[[beaconArray objectAtIndex:0] objectAtIndex:i] minor]]) {
+    
             
             //If there is no audio to play, then send no audio
             if ([[[beaconArray objectAtIndex:3] objectAtIndex:i] isEqualToString:@"nil"]) {
@@ -251,12 +254,11 @@
             //Transition into the next song with an audio fade
             [self doVolumeFade:url];
             
-            
-            //Set the active beacon being displayed
-            self.activeMinor = [[[beaconArray objectAtIndex:0] objectAtIndex:i] minor];
-
             //If the content is an image, load it as an image
             if(!([beaconArray[2][i] rangeOfString:@"image"].location == NSNotFound)) {
+                while ([self.navigationController topViewController] != self) {
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
                 beaconURL = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], beaconArray[1][i]]];
                 beaconRequest = [NSURLRequest requestWithURL:beaconURL];
                 [self.webView loadRequest:beaconRequest];
@@ -266,7 +268,13 @@
                 [self playVideoWithId:beaconArray[1][i]];
             }
             //If the content is a local video, load it in WebView
-            else if(!([beaconArray[2][i] rangeOfString:@"local-video"].location == NSNotFound)) {
+            else if(!([beaconArray[2][i] rangeOfString:@"local-video"].location == NSNotFound) && !([checkBeacon.minor isEqual:self.activeMinor]) && !self.isLocalVideo) {
+                self.isLocalVideo = true;
+                NSNumber *activeMinor = [[[beaconArray objectAtIndex:0] objectAtIndex:i] minor];
+                while ([self.navigationController topViewController] != self) {
+                    [self.navigationController popViewControllerAnimated:NO];
+                }
+                self.activeMinor = activeMinor;
                 beaconURL = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], beaconArray[1][i]]];
                 beaconRequest = [NSURLRequest requestWithURL:beaconURL];
                 [self.webView loadRequest:beaconRequest];
@@ -305,7 +313,12 @@
                 [self createPhotoGallery:photoArray];
             }
             
+            if([beaconArray[2][i] rangeOfString:@"local-video"].location == NSNotFound) {
+                self.isLocalVideo = false;
+            }
             
+            //Set the active beacon being displayed
+            self.activeMinor = [[[beaconArray objectAtIndex:0] objectAtIndex:i] minor];
             //Assert we are not on the landing image and that we can rotate here
             self.hasLanded = false;
             if ([beaconArray[2][i] rangeOfString:@"web-video"].location == NSNotFound && [beaconArray[2][i] rangeOfString:@"photo-gallery"].location == NSNotFound)
@@ -314,7 +327,11 @@
     }
     //If there are no beacons to display, go to the landing image
     if (checkBeacon == nil && self.hasLanded == false) {
+        while ([self.navigationController topViewController] != self) {
+            [self.navigationController popViewControllerAnimated:NO];
+        }
         //Load the image, transition to no audio, set the landed option, reset the active beacon, and restrict rotation
+
         beaconURL = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], @"landingImage.png"]];
         NSURLRequest *beaconRequest = [NSURLRequest requestWithURL:beaconURL];
         [self.webView loadRequest:beaconRequest];
@@ -322,6 +339,7 @@
         self.hasLanded = true;
         self.activeMinor = 0000;
         self.shouldRotate = NO;
+        self.isLocalVideo = false;
     }
 }
 
@@ -383,6 +401,7 @@
 - (void)playbackStateDidChange:(NSNotification *)note
 {
     self.shouldRotate = YES;
+    NSLog(@"%@", note);
 }
 
 /* shouldAutorotate
@@ -434,7 +453,12 @@
     // Optionally set the current visible photo before displaying
     [browser setCurrentPhotoIndex:0];
     
+    
+    while ([self.navigationController topViewController] != self) {
+        [self.navigationController popViewControllerAnimated:NO];
+    }
     // Present
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
     [self.navigationController pushViewController:browser animated:YES];
 }
 
