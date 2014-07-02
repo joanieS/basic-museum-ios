@@ -262,7 +262,7 @@
                     [self.navigationController popViewControllerAnimated:YES];
                 }
                 beaconURL = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], beaconArray[1][i]]];
-                htmlString = @"<style media='screen' type='text/css'> IMG.displayed {display: block; margin-left: auto;    margin-right: auto; background-color: rgb(71,77,73) } </style><html><body><img class='displayed' src='%@' height='100%%' align='middle'></body></html>";
+                htmlString = @"<style media='screen' type='text/css'> IMG.displayed {display: block; margin-left: auto;    margin-right: auto; background-color: rgb(71,77,73) } </style><html><body><img class='displayed' src='%@' height='100%%'  align='middle'></body></html>";
                 beaconHTML = [[NSString alloc] initWithFormat:htmlString,beaconURL];
                 self.webView.scalesPageToFit = YES;
                 [self.webView loadHTMLString:beaconHTML baseURL:nil];
