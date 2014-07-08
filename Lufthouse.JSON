@@ -11,13 +11,13 @@
                         "brownstour-05.png", "nil"],
                        
                        "photo-gallery", "nil"],
+            
             "4642"  : [["brownstour-06.png", "nil",
                         
                         "brownstour-07.png", "nil"],
                        
                        "photo-gallery", "Browns-Audio-1.mp3"],
             
-            "42298" : ["greatest_day.mp4", "local-video", "nil"],
             
             "39720" : [["brownstour-11.png", "nil",
                         
@@ -37,7 +37,7 @@
                         "brownstour-19.png", "nil"],
                        "photo-gallery", "nil"],
             
-            "62443" : ["brownstour-20.png", "image", "nil"],
+            "62443" : ["1964 Browns Final.mp4", "local-video", "nil"],
             
             "47919" : [["brownstour-21.png", "nil",
                         "brownstour-22.png", "nil",
@@ -50,6 +50,8 @@
                        "brownstour-30.png", "nil",
                        "brownstour-31.png", "nil"],
                        "photo-gallery", "nil"],
+            
+            "42298" : ["Browns Play.mov", "local-video", "nil"],
             
             "35084" : [["brownstour-26.png", "nil",
                         "brownstour-27.png", "nil",
@@ -67,7 +69,7 @@
                         "brownstour-40.png", "nil"],
                        "photo-gallery", "nil"],
             
-            "x" : ["1r_xDVAHYwU", "web-video", "nil"],
+            "x" : ["greatest_day.mp4", "local-video", "nil"],
             
             
 
